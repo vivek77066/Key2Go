@@ -1,0 +1,142 @@
+.parent-home {
+  display: flex;
+  justify-content: space-between;
+}
+
+#mainCarPng {
+  position: relative;
+  left: -10rem;
+  width: 50%;
+  height: 50%;
+  margin-top: 5%;
+}
+
+.mainClassDiv {
+  float: right;
+  margin-right: 6rem;
+  justify-content: right;
+  align-items: end;
+  overflow: hidden;
+}
+
+.mainClassDiv>h1:nth-child(1) {
+  font-size: 110px;
+  margin-top: 27px;
+  font-family: sans-serif;
+  opacity: 20%;
+  margin-bottom: -3rem;
+}
+
+
+.mainClassDiv>h2:nth-child(2) {
+  font-size: 90px;
+  font-family: sans-serif;
+  position: relative;
+  bottom: 90px;
+}
+
+.mainClassDiv > h3:nth-child(3) {
+  /*HELPS YOU_____ */
+  position: relative;
+  top: -100px;
+  color: #0055ff;
+}
+
+.mainClassDiv>h4 {
+  position: relative;
+  top: -120px;
+}
+
+.mainClassDiv>h6 {
+
+  position: relative;
+  top: -160px;
+}
+.info-container{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#InfoCarPng{
+  float: right;
+  overflow:hidden;
+  position: relative;
+  width: 550px;
+  height: 320px;
+}
+.info-content{
+  margin-left: 15rem;
+  
+}
+.info-content h3{
+  font-size: 40px;
+} 
+.info-content .info-li{
+  list-style-type: none;
+  font-size: 25px;
+  margin-top: 5px;
+}
+.info-li:nth-child(2) ,.info-li:nth-child(4){
+  color: #0055ff;
+}
+.car-list{
+  text-align: center;
+  color: #0055ff;
+  font-size: 55px;
+}
+
+.car-lists{
+  display: flex;
+  justify-content: space-evenly;
+  gap: 15px;
+  align-items: center;
+  overflow-x: scroll;
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.car-container{
+  border: 2px solid lightblue;
+  border-radius: 20px;
+  margin: 10px auto;
+  margin-top: 50px;
+  padding: 10px ;
+  width: 300px;
+  height: auto;
+}
+.car-list-img{
+  height: 150px;
+}
+.car-container li{
+  list-style-type:disc;
+}
+.btn{
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 30px;
+  background-color:black ;
+  padding: 13px 30px;
+  margin-left: 90px;
+}
+.btn-see-car {
+  margin-left: 50%;
+  background-color: white;  
+  color: black;             
+  border: 2px solid rgba(0, 0, 255, 0.68);  
+  padding: 10px 20px;    
+  font-size: 16px;         
+  border-radius: 5px;      
+  cursor: pointer;         
+  transition: background-color 0.3s ease, color 0.3s ease; 
+  margin-bottom: 10px;
+}
+
+.btn-see-car:hover {
+  background-color: rgba(0, 0, 255, 0.662);   /* Background changes to blue on hover */
+  color: white;             /* Text changes to white on hover */
+}
+
