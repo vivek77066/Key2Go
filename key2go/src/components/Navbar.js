@@ -1,7 +1,7 @@
 function Navbar(){
     return (
         <>
-        <h1 className='x'>This is Navbar</h1> 
+        
         </>
     )
 }

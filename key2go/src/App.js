@@ -1,16 +1,14 @@
-import Navbar from './components/Navbar';
+//import Navbar from './components/Navbar';
 import './CSS/App.css';
+//import ContactUs from './components/ContactUs';
+import Footer from './components/Footer';
  
 
 function App() {
   return (
     <>
-    <div className="navbar">
-    <h1>Hello this is first change</h1>
-    </div>
 
-    <Navbar/>
-
+   <Footer/>
     </>
   );
 }
