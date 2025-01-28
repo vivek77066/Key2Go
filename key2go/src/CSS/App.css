@@ -28,7 +28,14 @@
   font-weight: 500;
   transition: color 0.3s;
 }
+.nav-links a:nth-child(6){
+  color: #0066ff;
+}
+
 
 .nav-links a:hover {
   color: #0066ff;
+}
+.register :hover{
+  color: #666;
 }

@@ -10,7 +10,7 @@ function Navbar(){
             <a href="#">VEHICLE</a>
             <a href="#">ABOUT</a>
             <a href="#">LOGIN</a>
-            <a classname="register" href="#">REGISTER</a>
+            <a class="register" href="#">REGISTER</a>
         </div>
     </nav>
         </>

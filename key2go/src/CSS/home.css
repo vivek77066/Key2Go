@@ -70,7 +70,8 @@
   
 }
 .info-content h3{
-  font-size: 40px;
+  font-size: 50px;
+  opacity: 80%;
 } 
 .info-content .info-li{
   list-style-type: none;
@@ -83,10 +84,11 @@
 .car-list{
   text-align: center;
   color: #0055ff;
-  font-size: 55px;
+  font-size: 65px;
 }
 
 .car-lists{
+  padding: 8px;
   display: flex;
   justify-content: space-evenly;
   gap: 15px;
@@ -121,6 +123,11 @@
   background-color:black ;
   padding: 13px 30px;
   margin-left: 90px;
+  transition: background-color 0.3s ease, color 0.3s ease; 
+}
+.btn:hover{
+  background-color: rgba(0, 0, 255, 0.662);   /* Background changes to blue on hover */
+  color: white; 
 }
 .btn-see-car {
   margin-left: 50%;
