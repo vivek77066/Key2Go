@@ -1,0 +1,89 @@
+/* Header Container */
+.header-container {
+    background-color: #212529;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Header Content */
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+  }
+  
+  /* Brand Logo */
+  .brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .brand-logo {
+    height: 40px;
+  }
+  
+  .brand-title {
+    color: #ff4000;
+    font-size: 36px;
+    font-family: monospace;
+    font-weight: bold;
+    margin-left: 8px;
+  }
+  
+  /* Navigation Links */
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+  }
+  
+  .nav-btn {
+    background-color: transparent;
+    border: 1px solid #17a2b8;
+    padding: 8px 16px;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  
+  .nav-btn:hover {
+    background-color: #17a2b8;
+  }
+  
+  /* Register & Login Buttons */
+  .register-btn {
+    border-color: #007bff;
+  }
+  
+  .register-btn:hover {
+    background-color: #007bff;
+  }
+  
+  .login-btn {
+    border-color: #28a745;
+  }
+  
+  .login-btn:hover {
+    background-color: #28a745;
+  }
+  
+  /* Dropdown Styling */
+  .dropdown-link {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .dropdown-link:hover {
+    color: #007bff;
+  }
+  

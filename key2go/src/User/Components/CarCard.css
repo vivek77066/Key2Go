@@ -1,0 +1,47 @@
+.car-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .car-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: white;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    width: 250px;
+    text-align: center;
+  }
+  
+  .car-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .car-table {
+    width: 100%;
+  }
+  
+  .car-info {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .car-fuel-type, .car-seat-capacity, .car-type, .car-category {
+    color: #333;
+  }
+  
+  .car-image {
+    width: 100%;
+    border-radius: 5px;
+    margin: 10px 0;
+  }
+  
+  .car-price {
+    font-size: 18px;
+    color: #ff4000;
+    font-weight: bold;
+  }
+  

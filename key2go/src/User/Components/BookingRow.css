@@ -1,0 +1,34 @@
+/* Booking Row */
+.booking-row {
+    text-align: center;
+  }
+  
+  /* Buttons */
+  .cancel-btn {
+    background-color: #dc3545;
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #c82333;
+  }
+  
+  .details-btn {
+    background-color: #28a745;
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .details-btn:hover {
+    background-color: #218838;
+  }
+  

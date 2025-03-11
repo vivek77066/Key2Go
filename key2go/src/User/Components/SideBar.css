@@ -1,0 +1,31 @@
+/* Sidebar container */
+#sidebar-container {
+    height: 100vh;
+    background-color: #1e1e2f;
+  }
+  
+  /* Menu toggle button */
+  .menu-toggle {
+    text-align: center;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    color: #ffffff;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .menu-toggle:hover {
+    color: #ffcc00;
+  }
+  
+  /* Sidebar icons */
+  .pro-sidebar .pro-menu .pro-menu-item {
+    font-size: 16px;
+    color: #ffffff;
+  }
+  
+  .pro-sidebar .pro-menu .pro-menu-item:hover {
+    background-color: #44446f;
+    color: #ffcc00;
+  }
+  

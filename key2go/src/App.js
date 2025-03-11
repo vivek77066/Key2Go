@@ -1,14 +1,14 @@
-//import Navbar from './components/Navbar';
-import './CSS/App.css';
-//import ContactUs from './components/ContactUs';
-import Footer from './components/Footer';
+
+
+import BookingDetails from './pages/User/BookingDetails';
+
  
 
 function App() {
   return (
     <>
-
-   <Footer/>
+<BookingDetails/>
+ 
     </>
   );
 }
