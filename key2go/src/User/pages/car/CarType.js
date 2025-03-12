@@ -52,7 +52,7 @@ export default function CarType() {
       <Header className="navbar navbar-static-top" />
       <h1 className="title-header">Car Types</h1>
 
-      <CarTypeCard onItemSelect={fetchCarCategoryByType} carsType={carsType} />
+      {/* <CarTypeCard onItemSelect={fetchCarCategoryByType} carsType={carsType} /> */}
     </div>
   );
 }

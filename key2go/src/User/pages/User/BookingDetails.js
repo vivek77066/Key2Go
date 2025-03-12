@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { Header } from "../../Components/Header";
 import { url } from "../../../Commons/constants";
 import axios from "axios";
@@ -7,7 +7,7 @@ import "./BookingDetails.css"; // Import the CSS file
 
 function BookingDetails() {
   const location = useLocation();
-  const history = useHistory();
+  const history = useNavigate();
   const [booking, setBooking] = useState({});
   const conBooking = location.state?.bookingDetails;
 

@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { url } from "../../../Commons/constants";
 import "./UpdateProfile.css"; // Importing the CSS file
 
 const UpdateProfile = () => {
-  const history = useHistory();
+  const history = useNavigate();
   let user = JSON.parse(sessionStorage.getItem("user"));
 
   const [username, setUserName] = useState("");

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { url } from "../../../Commons/constants";
 import React from "react";
 import "./Login.css";
@@ -10,7 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let flag = "false";
-  const history = useHistory();
+  const history = useNavigate();
 
   const CheckRole = (role) => {
     if (role === "user") {

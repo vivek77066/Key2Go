@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { url } from "../../../Commons/constants";
 import BookingRow from "../../Components/BookingRow";
 import { Header } from "../../Components/Header";
@@ -11,7 +11,7 @@ function MyBookings() {
 
   console.log(user.data);
   const [bookings, setBookings] = useState([]);
-  const history = useHistory();
+  const history = useNavigate();
 
   useEffect(() => {
     getBookings();

@@ -1,14 +1,12 @@
 
-
-import BookingDetails from './pages/User/BookingDetails';
+import  Navbar  from './User/Components/Navbar';
 
  
 
 function App() {
   return (
     <>
-<BookingDetails/>
- 
+ <Navbar/>
     </>
   );
 }

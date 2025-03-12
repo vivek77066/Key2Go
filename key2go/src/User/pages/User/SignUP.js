@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { url } from "../../../Commons/constants";
 import "./SignUp.css"; // Importing the CSS file
 
@@ -15,7 +15,7 @@ const SignUp = () => {
   const [role, setRole] = useState("user");
   const [showRole, setShowRole] = useState(false);
 
-  const history = useHistory();
+  const history = useNavigate();
 
   const addUserToDB = () => {
     if (username.trim().length < 3) {

@@ -1,0 +1,36 @@
+/* Booking Container */
+.booking-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Table Styles */
+  .table-container {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .title-header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Button Styling */
+  .details-btn {
+    background-color: #ff8c00;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .details-btn:hover {
+    background-color: #e67e00;
+  }
+  

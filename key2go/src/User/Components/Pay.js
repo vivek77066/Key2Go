@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom"; // Replacing useHistory with useNavigate
 import { url } from "../../Commons/constants";
 import "./Pay.css"; // Import the CSS file
 
 function Pay() {
   const [booking, setBooking] = useState({});
-  const history = useHistory();
+  const navigate = useNavigate(); // Using useNavigate instead of useHistory
 
   useEffect(() => {
     let book = JSON.parse(sessionStorage.getItem("conBooking"));
@@ -61,10 +61,10 @@ function Pay() {
         };
 
         axios.put("http://localhost:4000/api/pay/update_pay_order", data)
-          .then(() => history.push("/car_type"))
+          .then(() => navigate("/car_type")) // Using navigate instead of history.push
           .catch(() => {
             alert("Some error occurred!");
-            history.goBack();
+            navigate(-1); // Replacing history.goBack()
           });
       },
       prefill: {
@@ -86,7 +86,8 @@ function Pay() {
       <label>Amount to Pay: </label>
       <h2 className="amount-box">₹ {JSON.parse(sessionStorage.getItem("amount"))}</h2>
       <button className="btn btn-success" onClick={displayRazorpay}>Pay</button>
-      <button className="btn btn-danger" onClick={history.goBack}>Back</button>
+      <button className="btn btn-danger" onClick={() => navigate(-1)}>Back</button> 
+      {/* Using navigate(-1) to go back */}
     </div>
   );
 }

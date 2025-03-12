@@ -1,26 +1,30 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { Header } from "../../Components/Header";
 import { url } from "../../../Commons/constants";
-import "./BookingForm.css"; // Importing CSS file
+import "./BookingForm.css"; 
 
 const today = new Date().toISOString().split("T")[0];
 
 const BookingForm = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
+
+  // Hooks must be at the top
+  const [location] = useState("Ahmedabad"); // Removed setLocation
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const [securityDeposit] = useState(1000); // Removed setSecurityDeposit
+
+  // Retrieve session values
   const isActive = sessionStorage.getItem("isActive");
   const user = JSON.parse(sessionStorage.getItem("user"));
   const carCategory = isActive ? JSON.parse(sessionStorage.getItem("carCategory")) : null;
 
-  if (!isActive) {
-    history.push("/signin");
-  }
-
-  const [location, setLocation] = useState("Ahmedabad");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
-  const [securityDeposit, setSecurityDeposit] = useState(1000);
+  // Prevent rendering if the user is inactive
+  // if (!isActive) {
+  //   return <Navigate to="/signin" />;
+  // }
 
   const handleFromDateChange = (e) => {
     const selectedDate = new Date(e.target.value);
@@ -29,7 +33,7 @@ const BookingForm = () => {
 
     if (selectedDate < tomorrow) {
       alert("From Date must be at least one day after today.");
-      setFromDate(""); 
+      setFromDate("");
     } else {
       setFromDate(e.target.value);
     }
@@ -83,7 +87,7 @@ const BookingForm = () => {
       const response = await axios.post(`${url}/booking/`, data);
       if (response.data.status === "success") {
         alert("Booking Confirmed!");
-        history.push("/");
+        navigate("/");
       } else {
         alert("Error while booking.");
       }
@@ -137,7 +141,7 @@ const BookingForm = () => {
 
           <div className="btn-group">
             <button onClick={AddDetailsToDB} className="btn btn-primary">Confirm Booking</button>
-            <button onClick={history.goBack} className="btn btn-warning">Cancel Booking</button>
+            <button onClick={() => navigate(-1)} className="btn btn-warning">Cancel Booking</button>
           </div>
         </div>
       </div>
