@@ -17,8 +17,9 @@ const CarCategory = () => {
   const [airbag, setAirbag] = useState(false);
 
   useEffect(() => {
-    axios.get(url + "/carType").then((res) => {
-      setCarType(res.data.data);
+    axios.get(url + "/api/cars").then((res) => {
+      console.log(res)
+      setCarType(res.data);
     });
     GetAllCars();
   }, []);
@@ -38,8 +39,8 @@ const CarCategory = () => {
     data.append("pricePerDay", pricePerDay);
     data.append("fuelType", fuelType);
 
-    axios.post(url + "/carCategory/", data).then((response) => {
-      if (response.data.status === "success") {
+    axios.post(url + "/api/cars", data).then((response) => {
+      if (response!=null) {
         alert("Car Category added successfully");
         GetAllCars();
       } else {
@@ -49,8 +50,8 @@ const CarCategory = () => {
   };
 
   const deleteCategory = (id) => {
-    axios.delete(url + "/carCategory/" + id).then((res) => {
-      if (res.data.status === "success") {
+    axios.delete(url + "/api/cars/" + id).then((res) => {
+      if (res!=null) {
         alert("Car Category deleted successfully");
         GetAllCars();
       } else {
@@ -60,8 +61,8 @@ const CarCategory = () => {
   };
 
   const GetAllCars = () => {
-    axios.get(url + "/carCategory/").then((response) => {
-      if (response.data.status === "success") {
+    axios.get(url + "/api/cars").then((response) => {
+      if (response!=null) {
         setCategories(response.data.data);
       } else {
         alert("Error while loading data");

@@ -56,12 +56,17 @@ const styles = {
 export default function AdminDashboard() {
   const navigate = useNavigate(); // Updated from useHistory
 
+  const [loading , setLoading]=useState(false)
+
   useEffect(() => {
+    setLoading(true)
     let user = JSON.parse(sessionStorage.getItem("user"));
 
-    if (!user || user.data.role !== "admin") {
-      navigate(-1); // Updated from history.goBack()
+    if (!user || user.role !== "admin") {
+      setLoading(false)
+      navigate(-1); 
     }
+    setLoading(false)
   }, [navigate]);
 
   const [fragment, setFragment] = useState("HOME");
@@ -82,6 +87,10 @@ export default function AdminDashboard() {
         return null;
     }
   };
+
+  if(loading){
+    return <h1>Loading...</h1>
+  }
 
   return (
     <div style={styles.root}>

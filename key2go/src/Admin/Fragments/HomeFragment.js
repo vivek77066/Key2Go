@@ -12,14 +12,15 @@ const HomeFragment = () => {
     const fetchData = async () => {
       try {
         const [usersRes, bookingsRes, employeesRes] = await Promise.all([
-          axios.get(`${url}/user/role/user`),
-          axios.get(`${url}/booking/`),
-          axios.get(`${url}/user/role/employee`),
+          axios.get(`${url}/api/users/role/user`),
+          axios.get(`${url}/api/bookings/all`),
+          axios.get(`${url}/api/users/role/employee`),
         ]);
-
-        setCount(usersRes.data.data.length || 0);
-        setBookings(bookingsRes.data.data.length || 0);
-        setEmployee(employeesRes.data.data.length || 0);
+        
+        setCount(usersRes.data.length || 0);
+        
+        setBookings(bookingsRes.data.length || 0);
+        setEmployee(employeesRes.data.length || 0);
 
         sessionStorage.setItem("bookings", JSON.stringify(bookingsRes.data));
       } catch (error) {

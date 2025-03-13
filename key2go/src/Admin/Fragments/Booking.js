@@ -7,13 +7,16 @@ function Bookings() {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    axios.get(url + "/booking/").then((response) => {
+    axios.get(url + "/api/bookings/all").then((response) => {
       const result = response.data;
-      if (result.status === "success") {
-        setBookings(result.data);
+      // console.log(result)
+      if (result && Array.isArray(result)) {
+        setBookings(result);
       } else {
-        alert("Error while loading data");
+        setBookings([]);  // Prevents map() from breaking
+        console.error("Unexpected API response format:", result);
       }
+      
     });
   }, []);
 
@@ -37,20 +40,27 @@ function Bookings() {
             </tr>
           </thead>
           <tbody>
-            {bookings.map((db) => (
-              <tr key={db.id}>
-                <td>{db.bookingid}</td>
-                <td>{db.carVarient}</td>
-                <td>{db.bookingDate}</td>
-                <td>{db.location}</td>
-                <td>{db.username}</td>
-                <td>{db.securityDeposit}</td>
-                <td>{db.fromDate}</td>
-                <td>{db.toDate}</td>
-                <td>{db.amount}</td>
-              </tr>
-            ))}
-          </tbody>
+  {bookings.length > 0 ? (
+    bookings.map((db) => (
+      <tr key={db.bookingId}>  
+        <td>{db.bookingId}</td>  
+        <td>{db.car.carName}</td> 
+        <td>{db.fromDate}</td> 
+        <td>{db.address}</td> 
+        <td>{db.user.username}</td> 
+        <td>{db.securityDeposit || "N/A"}</td>  
+        <td>{db.fromDate}</td>  
+        <td>{db.toDate}</td>  
+        <td>{db.totalAmount}</td> 
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="9" style={{ textAlign: "center" }}>No bookings found.</td>
+    </tr>
+  )}
+</tbody>
+
         </table>
       </div>
     </div>

@@ -6,19 +6,21 @@ import { url } from "../../../Commons/constants";
 import React from "react";
 import "./Login.css";
 
+console.log(url);
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  let flag = "false";
-  const history = useNavigate();
+  let flag = false;
+  const navigate = useNavigate();
 
   const CheckRole = (role) => {
     if (role === "user") {
-      history.push("/car_type");
+      navigate("/car_type");
     } else if (role === "admin") {
-      history.push("admin_dashboard");
+      navigate("/admin_dashboard");
     } else {
-      history.push("employee_dashboard");
+      navigate("/employee_dashboard");
     }
   };
   
@@ -32,13 +34,14 @@ const Login = () => {
         email: email,
         password: password,
       };
-
-      axios.post(url + "/user/authenticate", data).then((response) => {
+        console.log(data)
+      axios.post(url + "/api/users/authenticate", data).then((response) => {
         const result = response.data;
-        if (result.status === "success") {
+        console.log(result)
+        if (result != null) {
           alert("login Successfully");
-          flag = "true";
-          CheckRole(result.data.role);
+          flag = true;
+          CheckRole(result.role);
           sessionStorage.setItem("isActive", flag);
           sessionStorage.setItem("user", JSON.stringify(result));
         } else {

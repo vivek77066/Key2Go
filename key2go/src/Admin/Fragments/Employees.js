@@ -26,9 +26,10 @@ const Employees = () => {
   }, []);
 
   const GetAllEmployees = () => {
-    axios.get(url + "/user/role/employee").then((response) => {
-      if (response.data.status === "success") {
-        setEmployees(response.data.data);
+    axios.get(url + "/api/users/role/employee").then((response) => {
+      console.log(response)
+      if (response!=null) {
+        setEmployees(response.data);
       } else {
         alert("Error while loading employees");
       }
@@ -47,8 +48,9 @@ const Employees = () => {
       return;
     }
 
-    axios.post(url + "/user/addEmployee", formData).then((response) => {
-      if (response.data.status === "success") {
+    axios.post(url + "/api/users/addEmployee", formData).then((response) => {
+     
+      if (response!=null) {
         alert("Employee added successfully");
         setShowRegister(false);
         GetAllEmployees(); // Refresh list
@@ -61,8 +63,9 @@ const Employees = () => {
   const deleteUser = (id) => {
     if (!window.confirm("Are you sure you want to delete this employee?")) return;
 
-    axios.delete(url + "/user/" + id).then((response) => {
-      if (response.data.status === "success") {
+    axios.delete(url + "/api/users/" + id).then((response) => {
+    
+      if (response!=null) {
         alert("Employee deleted successfully");
         GetAllEmployees(); // Refresh list
       } else {

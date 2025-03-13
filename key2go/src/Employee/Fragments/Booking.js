@@ -34,14 +34,16 @@ function Booking() {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    axios.get(url + "/booking/").then((response) => {
+    axios.get(url + "/api/bookings/all").then((response) => {
       const result = response.data;
-      if (result.status === "success") {
-        setBookings(result.data);
-        console.log(result);
+      // console.log(result)
+      if (result && Array.isArray(result)) {
+        setBookings(result);
       } else {
-        alert("Error while loading data");
+        setBookings([]);  // Prevents map() from breaking
+        console.error("Unexpected API response format:", result);
       }
+      
     });
   }, []);
 
@@ -67,8 +69,8 @@ function Booking() {
           </TableHead>
           <TableBody>
             {bookings.map((db) => (
-              <StyledTableRow key={db.bookingid}>
-                <StyledTableCell align="center">{db.bookingid}</StyledTableCell>
+              <StyledTableRow key={db.bookingId}>
+                <StyledTableCell align="center">{db.bookingId}</StyledTableCell>
                 <StyledTableCell align="center">{db.carVarient}</StyledTableCell>
                 <StyledTableCell align="center">
                   {new Date(db.bookingDate).toDateString()}

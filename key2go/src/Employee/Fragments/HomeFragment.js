@@ -12,35 +12,35 @@ const HomeFragment = () => {
 
   useEffect(() => {
     axios
-      .get(url + "/carType/")
+      .get(url + "/api/cars")
       .then((res) => setCarTypes(res.data.data.length))
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     axios
-      .get(url + "/carCategory/")
+      .get(url + "/api/cars")
       .then((res) => setCarCategories(res.data.data.length))
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     axios
-      .get(url + "/user/role/user")
+      .get(url + "/api/users/role/user")
       .then((res) => setUser(res.data.data.length))
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     axios
-      .get(url + "/booking/")
+      .get(url + "/api/booking/all")
       .then((res) => setBookings(res.data.data.length))
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     axios
-      .get(url + "/carCategory/")
+      .get(url + "/api/cars")
       .then((res) => setCars(res.data.data.length))
       .catch((err) => console.log(err));
   }, []);

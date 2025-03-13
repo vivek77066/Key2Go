@@ -31,7 +31,7 @@ const Users = () => {
   const [users, setUsers] = useState([]);
 
   const deleteUser = (id) => {
-    axios.delete(url + "/user/" + id).then((res) => {
+    axios.delete(url + "/api/users/" + id).then((res) => {
       const result = res.data;
 
       if (result.status === "success") {
@@ -48,13 +48,14 @@ const Users = () => {
   }, []);
 
   const GetAllUsers = () => {
-    axios.get(url + "/user/role/user").then((response) => {
+    axios.get(url + "/api/users/role/user").then((response) => {
       const result = response.data;
-      if (result.status === "success") {
-        setUsers(result.data);
+      if (Array.isArray(result)) {
+        setUsers(result);
       } else {
-        alert("Error while loading data");
+        setUsers([]);  // Set an empty array to prevent errors
       }
+     
     });
   };
 
@@ -63,7 +64,7 @@ const Users = () => {
       <div className="page-heading">
         <h1 className="title">Users Overview</h1>
       </div>
-
+     
       <h4>User List:</h4>
       <TableContainer component={Paper} className="table-container">
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -77,23 +78,30 @@ const Users = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((db) => (
-              <StyledTableRow key={db.id}>
-                <StyledTableCell align="center">{db.username}</StyledTableCell>
-                <StyledTableCell align="center">{db.phone}</StyledTableCell>
-                <StyledTableCell align="center">{db.email}</StyledTableCell>
-                <StyledTableCell align="center">{db.address}</StyledTableCell>
-                <StyledTableCell align="center">
-                  <button
-                    onClick={() => deleteUser(db.id)}
-                    className="btn btn-warning"
-                  >
-                    Delete User
-                  </button>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
+
+  {Array.isArray(users) && users.length > 0 ? (
+    users.map((db) => (
+      <StyledTableRow key={db.id}>
+        <StyledTableCell align="center">{db.username}</StyledTableCell>
+        <StyledTableCell align="center">{db.phone}</StyledTableCell>
+        <StyledTableCell align="center">{db.email}</StyledTableCell>
+        <StyledTableCell align="center">{db.address}</StyledTableCell>
+        <StyledTableCell align="center">
+          <button onClick={() => deleteUser(db.id)} className="btn btn-warning">
+            Delete User
+          </button>
+        </StyledTableCell>
+      </StyledTableRow>
+    ))
+  ) : (
+    <StyledTableRow>
+      <StyledTableCell colSpan={5} align="center">
+        No users found.
+      </StyledTableCell>
+    </StyledTableRow>
+  )}
+</TableBody>
+
         </Table>
       </TableContainer>
     </div>
