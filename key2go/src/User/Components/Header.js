@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import "./Header.css"; // Import CSS file
 
-export const Header = () => {
+const Header = () => {
   const [username, setUserName] = useState("");
 
   useEffect(() => {
@@ -27,12 +27,12 @@ export const Header = () => {
               alt="logo"
               className="brand-logo"
             />
-            <span className="brand-title">RentPeCar</span>
+            <span className="brand-title">KEY2GO</span>
           </Link>
 
           <ul className="nav-links">
             <li><Link className="nav-btn" to="/home">Home <i className="fas fa-home"></i></Link></li>
-            <li><Link className="nav-btn" to="/car_type">All Cars <i className="fas fa-car"></i></Link></li>
+            <li><Link className="nav-btn" to="/all_carCompany">All Cars <i className="fas fa-car"></i></Link></li>
             <li><Link className="nav-btn" to="/about_us">About Us <i className="fas fa-info-circle"></i></Link></li>
             <li><Link className="nav-btn" to="/contact_us">Contact Us <i className="fas fa-mobile"></i></Link></li>
 
@@ -57,3 +57,5 @@ export const Header = () => {
     </div>
   );
 };
+
+export default Header;

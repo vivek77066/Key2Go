@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { Header } from "../../Components/Header";
+import  Header  from "../../Components/Header";
 import { url } from "../../../Commons/constants";
 import axios from "axios";
 import "./BookingDetails.css"; // Import the CSS file

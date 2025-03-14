@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Header } from "../../Components/Header";
+import  Header  from "../../Components/Header";
 import { url } from "../../../Commons/constants";
 import './CarCategoryDetails.css'
 

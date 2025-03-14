@@ -54,9 +54,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <main className="login-form">
-        <i className="fas fa-user login-icon"></i>
-        <h1 className="login-heading">Please sign in</h1>
-        
+        <h1 className="login-heading">Please Login in</h1>
         <div className="form-group">
           <input
             onChange={(event) => {
@@ -65,7 +63,7 @@ const Login = () => {
             type="email"
             className="form-input"
             id="floatingInput"
-            placeholder="name@example.com"
+            
           />
           <label htmlFor="floatingInput" className="form-label">Email address</label>
         </div>
@@ -78,7 +76,6 @@ const Login = () => {
             type="password"
             className="form-input"
             id="floatingPassword"
-            placeholder="Password"
           />
           <label htmlFor="floatingPassword" className="form-label">Password</label>
         </div>

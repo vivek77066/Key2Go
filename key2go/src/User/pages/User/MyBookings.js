@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { url } from "../../../Commons/constants";
 import BookingRow from "../../Components/BookingRow";
-import { Header } from "../../Components/Header";
+import  Header  from "../../Components/Header";
 import "./MyBookings.css"; // Importing the CSS file
 
 function MyBookings() {

@@ -12,8 +12,7 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [dob, setdob] = useState("");
   const [address, setAddress] = useState("");
-  const [role, setRole] = useState("user");
-  const [showRole, setShowRole] = useState(false);
+  const role = "user";
 
   const history = useNavigate();
 
@@ -47,12 +46,14 @@ const SignUp = () => {
       data.append("address", address.trim());
       data.append("role", role.trim());
 
+
       axios
         .post(url + "/user/addUser", data)
         .then((response) => {
           const result = response.data;
           if (result.status === "success") {
             alert("Sign Up successfully");
+            
             history.push("/signin");
           } else {
             alert("Error while Sign Up!");
@@ -100,7 +101,10 @@ const SignUp = () => {
         </div>
 
         <label>Gender*</label>
-        <div className="form-radio-group" onChange={(e) => setGender(e.target.value)}>
+        <div
+          className="form-radio-group"
+          onChange={(e) => setGender(e.target.value)}
+        >
           <input type="radio" value="Male" name="gender" /> Male
           <input type="radio" value="Female" name="gender" /> Female
           <input type="radio" value="Other" name="gender" /> Other
@@ -122,6 +126,7 @@ const SignUp = () => {
             onChange={(e) => setdob(e.target.value)}
             type="date"
             required
+            max={new Date().toISOString().split("T")[0]}
             className="form-control"
           />
         </div>
@@ -135,21 +140,19 @@ const SignUp = () => {
             className="form-control"
           />
         </div>
-
-        {showRole && (
-          <div className="form-group">
-            <label>Role*</label>
-            <select className="form-control">
-              <option selected>user</option>
-            </select>
-          </div>
-        )}
-
         <div className="btn-group">
-          <button type="submit" onClick={addUserToDB} className="btn btn-success">
+          <button
+            type="submit"
+            onClick={addUserToDB}
+            className="btn btn-success"
+          >
             Register
           </button>
-          <button type="button" onClick={history.goBack} className="btn btn-danger">
+          <button
+            type="button"
+            onClick={history.goBack}
+            className="btn btn-danger"
+          >
             Back
           </button>
         </div>

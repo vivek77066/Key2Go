@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"; // Updated for React Router v6
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CarCard from "../../Components/CarCard";
-import { Header } from "../../Components/Header";
+import  Header  from "../../Components/Header";
 import "./Cars.css"; // Import the normal CSS file
 
 const Cars = () => {
@@ -11,7 +11,6 @@ const Cars = () => {
   const navigate = useNavigate(); // useNavigate() replaces useHistory()
 
   useEffect(() => {
-    console.log("🚗 Cars component mounted.");
     fetchAllCars();
   }, []);
 

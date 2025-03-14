@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import { Header } from "../../Components/Header";
+import  Header  from "../../Components/Header";
 import { url } from "../../../Commons/constants";
 import "./BookingForm.css"; 
 
