@@ -10,4 +10,7 @@ public interface BookingService {
     Booking bookCar(int userId, int carId, LocalDate fromDate, LocalDate toDate , boolean status);
     List<Booking> getAllBookings();
     List<Booking> getBookingsByUser(User userId);
+    Booking getBookingById(int bookingId);
+    Booking updateBooking(int bookingId,Booking updatedBooking);
+    void deleteBookingById(int bookingId);
 }

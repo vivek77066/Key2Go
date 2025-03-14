@@ -45,4 +45,22 @@ public class BookingServiceImpl implements BookingService {
         return bookingRepository.findByUser(userId);
     }
 
+    @Override
+    public Booking getBookingById(int bookingId) {
+        return bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found with ID: " + bookingId));
+    }
+    @Override
+    public Booking updateBooking(int bookingId, Booking updatedBooking) {
+        return bookingRepository.findById(bookingId).map(booking -> {
+            booking.setStatus(updatedBooking.isStatus()); // Example: Updating booking status
+            return bookingRepository.save(booking);
+        }).orElseThrow(() -> new RuntimeException("Booking not found with ID: " + bookingId));
+    }
+
+    @Override
+    public void deleteBookingById(int bookingId) {
+        Booking booking = getBookingById(bookingId);
+        bookingRepository.delete(booking);
+    }
 }
