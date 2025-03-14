@@ -78,14 +78,12 @@ const BookingForm = () => {
     try {
       const data = new FormData();
       data.append("user", user.data.userid);
-      data.append("carCategory", carCategory.id);
-      data.append("location", location);
+      data.append("carComId", carCategory.id);
       data.append("fromDate", fromDate);
       data.append("toDate", toDate);
-      data.append("securityDeposit", securityDeposit);
 
-      const response = await axios.post(`${url}/booking/`, data);
-      if (response.data.status === "success") {
+      const response = await axios.post(`${url}/api/bookings`, data);
+      if (response!=null) {
         alert("Booking Confirmed!");
         navigate("/");
       } else {

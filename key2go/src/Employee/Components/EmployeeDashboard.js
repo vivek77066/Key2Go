@@ -47,33 +47,51 @@ const Content = styled("main")(({ theme }) => ({
   padding: theme.spacing(3),
 }));
 
+
+
 export default function EmployeeDashboard() {
   const navigate = useNavigate();
-  
+
+   const [loading , setLoading]=useState(false)
+
   useEffect(() => {
+    setLoading(true)
     const user = JSON.parse(sessionStorage.getItem("user"));
-    if (!user || user.data.role !== "employee") {
+  
+    // Check if user exists and has a role property
+    if (!user || !user.role) {
+      setLoading(false)
+      navigate("/error");
+    } else if (user.role !== "employee") {
+      setLoading(false)
       navigate("/error");
     }
   }, [navigate]);
+  
 
   const [fragment, setFragment] = useState("HOME");
+  
 
   const loadFragment = () => {
     switch (fragment) {
       case "HOME":
         return <HomeFragment />;
       case "Bookings":
-        return <Booking/>;
+        return <Booking />;
       case "Logout":
         return <Logout />;
-      case "CarCategoriesFragment":
+      case "CarCompanyFragment":
         return <CarCategoriesFragment />;
       case "CarFragment":
         return <CarFragment />;
       default:
         return <HomeFragment />;
     }
+
+    if(loading){
+      return <p>Loading...</p>
+    }
+  
   };
 
   return (
@@ -102,11 +120,11 @@ export default function EmployeeDashboard() {
             </ListItemIcon>
             <ListItemText primary="Total Bookings" />
           </ListItem>
-          <ListItem button onClick={() => setFragment("CarCategoriesFragment")}>
+          <ListItem button onClick={() => setFragment("CarCompanyFragment")}>
             <ListItemIcon>
               <DirectionsCarRounded />
             </ListItemIcon>
-            <ListItemText primary="Car Categories" />
+            <ListItemText primary="Car Companies" />
           </ListItem>
           <ListItem button onClick={() => setFragment("CarFragment")}>
             <ListItemIcon>

@@ -33,7 +33,6 @@ function Bookings() {
               <th>Booking Date</th>
               <th>Pickup Location</th>
               <th>User Name</th>
-              <th>Advance</th>
               <th>From Date</th>
               <th>To Date</th>
               <th>Total Amount</th>
@@ -47,8 +46,7 @@ function Bookings() {
         <td>{db.car.carName}</td> 
         <td>{db.fromDate}</td> 
         <td>{db.address}</td> 
-        <td>{db.user.username}</td> 
-        <td>{db.securityDeposit || "N/A"}</td>  
+        <td>{db.user.username}</td>  
         <td>{db.fromDate}</td>  
         <td>{db.toDate}</td>  
         <td>{db.totalAmount}</td> 

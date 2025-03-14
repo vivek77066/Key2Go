@@ -17,10 +17,10 @@ const Cars = () => {
 
   const fetchAllCars = async () => {
     try {
-      const response = await axios.get(`${url}/carCategory/`);
+      const response = await axios.get(`${url}/api/cars`);
       const result = response.data;
-      if (result.status === "success") {
-        setCars(result.data);
+      if (result!=null) {
+        setCars(result);
       } else {
         alert("⚠️ Error while loading car categories.");
       }
@@ -31,12 +31,12 @@ const Cars = () => {
 
   const handleCarCategoryClick = async (car) => {
     try {
-      const response = await axios.get(`${url}/carCategory/${car.id}`);
+      const response = await axios.get(`${url}/api/cars${car.id}`);
       const result = response.data;
 
-      if (result.status === "success") {
-        console.log("✅ Fetched car category:", result.data);
-        navigate("/cars-category-details", { state: { carCategory: result.data } });
+      if (result!=null) {
+        console.log("✅ Fetched car category:", result);
+        navigate("/cars-category-details", { state: { carCategory: result } });
       } else {
         alert("⚠️ Error occurred while fetching car category details.");
       }

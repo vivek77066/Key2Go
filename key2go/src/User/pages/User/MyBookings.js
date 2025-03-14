@@ -18,7 +18,7 @@ function MyBookings() {
   }, []);
 
   const getBookings = () => {
-    axios.get(url + "/booking/findByUser/" + user.data.userid).then((response) => {
+    axios.get(url + "/api/booking/findByUser/" + user.data.userid).then((response) => {
       const result = response.data;
       if (result.status === "success") {
         setBookings(result.data);
@@ -36,10 +36,10 @@ function MyBookings() {
     } else {
       axios.get(url + "/booking/" + booking.bookingid).then((response) => {
         const result = response.data;
-        if (result.status === "success") {
+        if (result!=null) {
           console.log(result);
           history.push("/booking_details", {
-            bookingDetails: result.data,
+            bookingDetails: result,
           });
         } else {
           alert("Error occurred while getting bookings");
@@ -55,7 +55,7 @@ function MyBookings() {
     } else {
       axios.delete(url + "/booking/" + booking.bookingid).then((response) => {
         const result = response.data;
-        if (result.status === "success") {
+        if (result!=null) {
           console.log(result.status);
           alert("Booking cancelled");
           window.location.reload();
@@ -88,7 +88,7 @@ function MyBookings() {
           <tbody>
             {bookings.map((booking) => (
               <BookingRow
-                key={booking.bookingid}
+                key={booking.bookingId}
                 booking={booking}
                 deleteBooking={cancelBooking}
                 bookingDetail={bookingDetail}

@@ -3,157 +3,132 @@ import axios from "axios";
 import { url } from "../../Commons/constants";
 import { useNavigate } from "react-router-dom";
 import "./CarCategoriesFragment.css";
+import { Button } from "react-bootstrap";
 
 const CarCategory = () => {
   const navigate = useNavigate();
-  const [categories, setCategories] = useState([]);
-  const [carType, setCarType] = useState([]);
-  const [type, setType] = useState("");
+  const [cars, setCars] = useState([]);
   const [carCatImg, setCarCatImg] = useState(undefined);
   const [categoryName, setCategoryName] = useState("");
-  const [seatCapacity, setSeatCapacity] = useState("");
-  const [pricePerDay, setPricePerDay] = useState("");
-  const [fuelType, setFuelType] = useState("");
-  const [airbag, setAirbag] = useState(false);
+  const [showForm, setShowForm] = useState(false); // Controls form visibility
 
   useEffect(() => {
-    axios.get(url + "/api/cars").then((res) => {
-      console.log(res)
-      setCarType(res.data);
-    });
     GetAllCars();
   }, []);
 
+  const GetAllCars = () => {
+    axios.get(url + "/api/cars")
+      .then((response) => {
+        console.log("GetAllCars API Response:", response.data);
+        setCars(Array.isArray(response.data) ? response.data : []);
+      })
+      .catch((error) => {
+        console.error("Error fetching cars:", error);
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!carCatImg || !categoryName || !seatCapacity || !pricePerDay || !fuelType || !type) {
+    if (!carCatImg || !categoryName) {
       alert("Please fill in all fields.");
       return;
     }
 
     const data = new FormData();
-    data.append("carType", type);
     data.append("carCatImg", carCatImg);
     data.append("categoryName", categoryName);
-    data.append("seatCapacity", seatCapacity);
-    data.append("pricePerDay", pricePerDay);
-    data.append("fuelType", fuelType);
 
-    axios.post(url + "/api/cars", data).then((response) => {
-      if (response!=null) {
-        alert("Car Category added successfully");
-        GetAllCars();
-      } else {
+    axios.post(url + "/api/cars", data)
+      .then((response) => {
+        if (response.data) {
+          alert("Car added successfully");
+          GetAllCars();
+          setShowForm(false); // Close form after success
+          setCategoryName(""); // Clear form inputs
+          setCarCatImg(undefined);
+        } else {
+          alert("Error while adding");
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding car:", error);
         alert("Error while adding");
-      }
-    });
+      });
   };
 
-  const deleteCategory = (id) => {
-    axios.delete(url + "/api/cars/" + id).then((res) => {
-      if (res!=null) {
-        alert("Car Category deleted successfully");
-        GetAllCars();
-      } else {
+  const handleAddCar = () => {
+    setShowForm(true); // Show the form
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false); // Hide the form
+  };
+
+  const deleteCar = (id) => {
+    axios.delete(url + `/api/cars/${id}`)
+      .then((res) => {
+        if (res.data) {
+          alert("Car deleted successfully");
+          GetAllCars();
+        } else {
+          alert("Error while deleting");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting car:", error);
         alert("Error while deleting");
-      }
-    });
-  };
-
-  const GetAllCars = () => {
-    axios.get(url + "/api/cars").then((response) => {
-      if (response!=null) {
-        setCategories(response.data.data);
-      } else {
-        alert("Error while loading data");
-      }
-    });
+      });
   };
 
   return (
-    <div className="container">
-      <h2>Car Variants</h2>
+    <div className="cccontainer">
+      <h2>Car Company</h2>
       <hr />
-      <div className="form-container">
-        <h3>Add New Category</h3>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Category Name</label>
-            <input type="text" onChange={(e) => setCategoryName(e.target.value)} required />
-          </div>
 
-          <div className="form-group">
-            <label>Car Category Image</label>
-            <input type="file" onChange={(e) => setCarCatImg(e.target.files[0])} accept="image/*" required />
-          </div>
+      {/* Add New Car Button */}
+      <button className="add-car-btn" onClick={handleAddCar}>Add New Car</button>
 
-          <div className="form-group">
-            <label>Car Type</label>
-            <select onChange={(e) => setType(e.target.value)} required>
-              <option value="">Select Car Type</option>
-              {carType.map((car) => (
-                <option key={car.id} value={car.id}>
-                  {car.typeName}
-                </option>
-              ))}
-            </select>
-          </div>
+      {/* Form to Add New Car */}
+      {showForm && (
+        <div className="form-popup">
+          <h3>Add New Car</h3>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Car Name</label>
+              <input type="text" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} required />
+            </div>
 
-          <div className="form-group">
-            <label>Fuel Type</label>
-            <select onChange={(e) => setFuelType(e.target.value)} required>
-              <option value="">Select Fuel Type</option>
-              <option value="Petrol">Petrol</option>
-              <option value="Diesel">Diesel</option>
-              <option value="CNG">CNG</option>
-            </select>
-          </div>
+            <div className="form-group">
+              <label>Car Company Image</label>
+              <input type="file" onChange={(e) => setCarCatImg(e.target.files[0])} accept="image/*" required />
+            </div>
 
-          <div className="form-group">
-            <label>Seat Capacity</label>
-            <input type="number" onChange={(e) => setSeatCapacity(e.target.value)} required />
-          </div>
-
-          <div className="form-group">
-            <label>Price Per Day (Rs.)</label>
-            <input type="number" onChange={(e) => setPricePerDay(e.target.value)} required />
-          </div>
-
-          <div className="form-group checkbox">
-            <input type="checkbox" onChange={(e) => setAirbag(e.target.checked)} />
-            <label>Airbag</label>
-          </div>
-
-          <button type="submit" className="btn">Add</button>
-        </form>
-      </div>
+            <div className="form-actions">
+              <button type="submit" className="btn">Add</button>
+              <button type="button" className="btn-close" onClick={handleCloseForm}>Close</button>
+            </div>
+          </form>
+        </div>
+      )}
 
       <h2>Available Cars</h2>
       <table className="custom-table">
         <thead>
           <tr>
             <th>Image</th>
-            <th>Car Name</th>
-            <th>Car Type</th>
-            <th>Fuel Type</th>
-            <th>Rental (Rs.)</th>
-            <th>Seat Capacity</th>
+            <th>Car Company</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {categories.map((db) => (
-            <tr key={db.id}>
+          {cars.map((car) => (
+            <tr key={car.carId}>
               <td>
-                <img className="car-image" src={`${url}/${db.carCatImg}`} alt={db.categoryName} />
+                <img className="car-image" src={`${url}/${car.carCompanyId.carComImg}`} alt={car.carName} />
               </td>
-              <td>{db.categoryName}</td>
-              <td>{db.typeName}</td>
-              <td>{db.fuelType}</td>
-              <td>{db.pricePerDay}</td>
-              <td>{db.seatCapacity}</td>
+              <td>{car.carCompanyId.companyName}</td>  
               <td>
-                <button className="btn-delete" onClick={() => deleteCategory(db.id)}>Delete</button>
+                <button className="btn-delete" onClick={() => deleteCar(car.carId)}>Delete</button>
               </td>
             </tr>
           ))}

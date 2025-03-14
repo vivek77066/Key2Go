@@ -26,12 +26,12 @@ const UpdateProfile = () => {
     data.append("address", updatedAddress);
 
     axios
-      .put(`${url}/user/updateProfile/${user.data.userid}`, data)
+      .put(`${url}/api/users/${user.data.userid}`, data)
       .then((response) => {
         setLoading(false);
         const result = response.data;
 
-        if (result.status === "success") {
+        if (result!=null) {
           alert("Profile updated successfully");
 
           const updatedUser = {

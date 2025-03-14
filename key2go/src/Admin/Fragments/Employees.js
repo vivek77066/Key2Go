@@ -53,7 +53,7 @@ const Employees = () => {
       if (response!=null) {
         alert("Employee added successfully");
         setShowRegister(false);
-        GetAllEmployees(); // Refresh list
+        GetAllEmployees(); 
       } else {
         alert("Error while adding employee");
       }
@@ -61,6 +61,7 @@ const Employees = () => {
   };
 
   const deleteUser = (id) => {
+    console.log(id);
     if (!window.confirm("Are you sure you want to delete this employee?")) return;
 
     axios.delete(url + "/api/users/" + id).then((response) => {
@@ -75,16 +76,16 @@ const Employees = () => {
   };
 
   return (
-    <div className="container">
+    <div className="AEtitle">
       <h1 className="title">Employees Overview</h1>
       <hr />
 
       {/* Add Employee Button */}
-      <button onClick={() => setShowRegister(true)} className="btn btn-primary">
+      <button onClick={() => setShowRegister(true)} className="add-employee">
         Add New Employee
       </button>
 
-      {/* Employee Registration Modal */}
+      <div className={`AEcontainer ${showRegister ? "modal-open" : ""}`}>
       <Modal show={showRegister} onHide={() => setShowRegister(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Enter Employee Details</Modal.Title>
@@ -134,13 +135,13 @@ const Employees = () => {
           </thead>
           <tbody>
             {employees.map((emp) => (
-              <tr key={emp.id}>
+              <tr key={emp.userId}>
                 <td>{emp.username}</td>
                 <td>{emp.phone}</td>
                 <td>{emp.email}</td>
                 <td>{emp.address}</td>
                 <td>
-                  <button onClick={() => deleteUser(emp.id)} className="btn btn-danger btn-sm">
+                  <button onClick={() => deleteUser(emp.userId)} className="btn btn-danger btn-sm">
                     Delete
                   </button>
                 </td>
@@ -149,6 +150,7 @@ const Employees = () => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 };

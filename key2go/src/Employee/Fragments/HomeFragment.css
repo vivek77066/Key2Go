@@ -1,54 +1,89 @@
-.container {
-  text-align: center;
-  margin: 20px auto;
-  max-width: 900px;
+.emcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.title {
-  font-size: 24px;
-  font-weight: bold;
+/* Title Styles */
+.emtitle {
+  font-size: 28px;
   margin-bottom: 20px;
+  color: #333;
 }
 
-.row {
+/* Row Styles */
+.emrow {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   gap: 20px;
   margin-bottom: 20px;
 }
 
-.card {
-  flex: 1;
+/* Card Styles */
+.card_dark,
+.card_info,
+.card_primary,
+.card_danger,
+.card_warning {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  border-radius: 10px;
-  color: white;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
 }
 
-.card:hover {
-  transform: scale(1.05);
+/* Individual Card Styles */
+.card_dark {
+  background-color: #343a40;
+  color: #fff;
 }
 
-.dark {
-  background-color: #333;
-}
-
-.info {
+.card_info {
   background-color: #17a2b8;
+  color: #fff;
 }
 
-.primary {
+.card_primary {
   background-color: #007bff;
+  color: #fff;
 }
 
-.danger {
+.card_danger {
   background-color: #dc3545;
+  color: #fff;
 }
 
-.warning {
+.card_warning {
   background-color: #ffc107;
+  color: #fff;
+}
+
+/* Card Content Styles */
+.card_dark h5,
+.card_info h5,
+.card_primary h5,
+.card_danger h5,
+.card_warning h5 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.card_dark p,
+.card_info p,
+.card_primary p,
+.card_danger p,
+.card_warning p {
+  font-size: 18px;
+  margin: 0;
 }

@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Updated for React Router v6
 import axios from "axios";
 import React from "react";
-import CarTypeCard from "../../Components/CarTypeCard";
+import CarTypeCard from '../../../User/Components/CarTypeCard'
+
 import { Header } from "../../Components/Header";
 import "./CarType.css"; // Import the normal CSS file
 
@@ -17,13 +18,14 @@ export default function CarType() {
   }, []);
 
   const fetchCarCategoryByType = async (carType) => {
+    
     try {
-      const response = await axios.get(`${url}/carCategory/type/${carType.id}`);
+      const response = await axios.get(`${url}/api/cars/${carType.id}`);
       const result = response.data;
 
-      if (result.status === "success") {
-        console.log("✅ Fetched car categories:", result.data);
-        navigate("/cars-category-list", { state: { carCategory: result.data } });
+      if (result!=null) {
+        console.log("✅ Fetched car categories:", result);
+        navigate("/cars-category-list", { state: { carCategory: result} });
       } else {
         alert("⚠️ Error occurred while fetching car categories.");
       }
@@ -34,11 +36,11 @@ export default function CarType() {
 
   const fetchAllCarTypes = async () => {
     try {
-      const response = await axios.get(`${url}/carType`);
+      const response = await axios.get(`${url}/api/cars`);
       const result = response.data;
 
-      if (result.status === "success") {
-        setCarType(result.data);
+      if (result!=null) {
+        setCarType(result);
       } else {
         alert("⚠️ Error while loading car types.");
       }
@@ -52,7 +54,7 @@ export default function CarType() {
       <Header className="navbar navbar-static-top" />
       <h1 className="title-header">Car Types</h1>
 
-      {/* <CarTypeCard onItemSelect={fetchCarCategoryByType} carsType={carsType} /> */}
+      { <CarTypeCard onItemSelect={fetchCarCategoryByType} carsType={carsType} /> }
     </div>
   );
 }

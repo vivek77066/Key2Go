@@ -8,12 +8,18 @@ export const Header = () => {
 
   useEffect(() => {
     let isActive = sessionStorage.getItem("isActive");
-    let user = JSON.parse(sessionStorage.getItem("user"));
-
-    if (isActive !== null && user?.data !== null) {
-      setUserName(user.data.username);
-    } else {
-      setUserName("");
+    let user = sessionStorage.getItem("user");
+    
+    if (isActive && user) {
+      try {
+        let parsedUser = JSON.parse(user);
+        if (parsedUser?.data?.username) {
+          setUserName(parsedUser.data.username);
+        }
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+        setUserName(""); // Ensure username is reset if parsing fails
+      }
     }
   }, []);
 

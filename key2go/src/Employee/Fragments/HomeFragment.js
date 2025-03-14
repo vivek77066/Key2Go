@@ -13,62 +13,58 @@ const HomeFragment = () => {
   useEffect(() => {
     axios
       .get(url + "/api/cars")
-      .then((res) => setCarTypes(res.data.data.length))
+      .then((res) => setCarTypes(res.data.length)||0) // Fix: Extract res.data
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     axios
       .get(url + "/api/cars")
-      .then((res) => setCarCategories(res.data.data.length))
+      .then((res) => setCarCategories(res.data.length)||0) // Fix: Extract res.data
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     axios
-      .get(url + "/api/users/role/user")
-      .then((res) => setUser(res.data.data.length))
+      .get(url + "/api/users/role/employee") // Fix: Corrected endpoint typo ("empoyee" → "employee")
+      .then((res) => setUser(res.data.length||0)) // Fix: Extract res.data
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     axios
-      .get(url + "/api/booking/all")
-      .then((res) => setBookings(res.data.data.length))
+      .get(url + "/api/bookings/all")
+      .then((res) => setBookings(res.data.length||0)) // Fix: Extract res.data
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     axios
       .get(url + "/api/cars")
-      .then((res) => setCars(res.data.data.length))
+      .then((res) => setCars(res.data.length||0)) // Fix: Extract res.data
       .catch((err) => console.log(err));
   }, []);
 
   return (
-    <div className="container">
-      <h3 className="title">Employee Dashboard</h3>
-      <div className="row">
-        <div className="card dark">
-          <h5>Total Car Types</h5>
-          <p>{carTypes}</p>
-        </div>
-        <div className="card info">
-          <h5>Total Car Categories</h5>
+    <div className="emcontainer">
+      <h3 className="emtitle">Employee Dashboard</h3>
+      <div className="emrow">
+        <div className="card_info">
+          <h5>Total Car Companies</h5>
           <p>{carCategories}</p>
         </div>
-        <div className="card primary">
+        <div className="card_primary">
           <h5>Registered Users</h5>
           <p>{user}</p>
         </div>
       </div>
 
-      <div className="row">
-        <div className="card danger">
+      <div className="emrow">
+        <div className="card_danger">
           <h5>Total Bookings</h5>
           <p>{bookings}</p>
         </div>
-        <div className="card warning">
+        <div className="card_warning">
           <h5>Total Cars</h5>
           <p>{cars}</p>
         </div>

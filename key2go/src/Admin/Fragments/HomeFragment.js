@@ -32,28 +32,28 @@ const HomeFragment = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="ADcontainer">
       <br />
       <h3>Admin Dashboard</h3>
       <hr />
       <br />
       <br />
-      <div className="row">
-        <div className="col card">
+      <div className="admin-info">
+        <div className="info-card">
           <div className="card-header">Users Section</div>
           <div className="card-body">
             <h5 className="card-title">Total Users</h5>
             <p className="card-text">{count}</p>
           </div>
         </div>
-        <div className="col card">
+        <div className="info-card">
           <div className="card-header">Bookings Section</div>
           <div className="card-body">
             <h5 className="card-title">Total Bookings</h5>
             <p className="card-text">{booking}</p>
           </div>
         </div>
-        <div className="col card">
+        <div className="info-card">
           <div className="card-header">Employees</div>
           <div className="card-body">
             <h5 className="card-title">Total Employees</h5>

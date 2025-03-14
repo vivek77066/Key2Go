@@ -48,7 +48,7 @@ const SignUp = () => {
       data.append("role", role.trim());
 
       axios
-        .post(url + "/user/addUser", data)
+        .post(url + "/api/users", data)
         .then((response) => {
           const result = response.data;
           if (result.status === "success") {

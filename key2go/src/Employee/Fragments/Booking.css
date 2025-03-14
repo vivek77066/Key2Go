@@ -1,36 +1,109 @@
 /* Booking Container */
-.booking-container {
-    padding: 20px;
-    background-color: #f9f9f9;
+.embooking-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content */
+}
+
+/* Table Styles */
+.emtable-container {
+  width: 100%; /* Increased table width */
+  max-width: 2000px; /* Prevents too large tables */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1); /* Slight shadow for better appearance */
+}
+
+/* Table Header */
+.MuiTableCell-head {
+  font-size: 18px !important; /* Bigger font size */
+  padding: 16px !important; /* More padding */
+  background-color: #2c3e50 !important; /* Darker header */
+  color: #ffffff !important;
+  text-align: center;
+}
+
+/* Table Row & Cells */
+.MuiTableCell-body {
+  font-size: 16px !important; /* Bigger text */
+  padding: 14px !important; /* More spacing */
+  text-align: center;
+}
+
+/* Table Row Hover Effect */
+.MuiTableRow-root:hover {
+  background-color: #f0f0f0 !important;
+  transition: background 0.2s ease-in-out;
+}
+
+/* Increase Row Height */
+.MuiTableRow-root {
+  height: 60px !important; /* Taller rows */
+}
+
+/* Title Header */
+.emtitle-header {
+  font-size: 30px; /* Bigger title */
+  font-weight: bold;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Button Styling */
+.details-btn {
+  background-color: #ff8c00;
+  color: white;
+  border: none;
+  padding: 12px 16px; /* Bigger button */
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.details-btn:hover {
+  background-color: #e67e00;
+  transform: scale(1.07);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .emtable-container {
+      width: 100%; /* Full width for smaller screens */
   }
-  
-  /* Table Styles */
-  .table-container {
-    border-radius: 8px;
-    overflow: hidden;
+
+  .MuiTableCell-head,
+  .MuiTableCell-body {
+      font-size: 15px !important;
+      padding: 12px !important;
   }
-  
-  .title-header {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    margin-bottom: 10px;
+
+  .MuiTableRow-root {
+      height: 55px !important;
   }
-  
-  /* Button Styling */
+
   .details-btn {
-    background-color: #ff8c00;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
+      padding: 10px 12px;
+      font-size: 14px;
   }
-  
-  .details-btn:hover {
-    background-color: #e67e00;
+}
+
+@media (max-width: 768px) {
+  .MuiTableCell-head,
+  .MuiTableCell-body {
+      font-size: 14px !important;
+      padding: 10px !important;
   }
-  
+
+  .MuiTableRow-root {
+      height: 50px !important;
+  }
+
+  .details-btn {
+      padding: 8px 10px;
+      font-size: 13px;
+  }
+}
