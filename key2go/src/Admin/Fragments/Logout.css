@@ -1,0 +1,40 @@
+.container {
+    width: 90%;
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
+  .center-text {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+  }
+  
+  .card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  

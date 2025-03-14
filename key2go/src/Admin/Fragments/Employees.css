@@ -1,0 +1,41 @@
+.container {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+  }
+  
+  .custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .custom-table th, .custom-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .custom-table th {
+    background-color: black;
+    color: white;
+  }
+  
+  .custom-table tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .custom-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  

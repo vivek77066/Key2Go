@@ -1,14 +1,12 @@
-//import Navbar from './components/Navbar';
-import './CSS/App.css';
-//import ContactUs from './components/ContactUs';
-import Footer from './components/Footer';
+
+import  Navbar  from './User/Components/Navbar';
+
  
 
 function App() {
   return (
     <>
-
-   <Footer/>
+ <Navbar/>
     </>
   );
 }

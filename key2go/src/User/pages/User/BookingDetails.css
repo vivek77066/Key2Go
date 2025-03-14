@@ -1,0 +1,73 @@
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .title-header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .booking-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .booking-table th,
+  .booking-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .table-header {
+    background-color: #343a40;
+    color: white;
+    font-size: 18px;
+  }
+  
+  .image-container {
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .car-image {
+    height: 300px;
+    width: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+  }
+  
+  .back-button {
+    display: block;
+    width: 100px;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #ffc107;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .back-button:hover {
+    background-color: #e0a800;
+  }
+  
+  .loading-text {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 20px;
+  }
+  

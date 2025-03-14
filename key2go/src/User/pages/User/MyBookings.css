@@ -1,0 +1,36 @@
+.my-bookings-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .title-header {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .nav-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .table {
+    width: 80%;
+    border-collapse: collapse;
+    background: white;
+  }
+  
+  .table th,
+  .table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
