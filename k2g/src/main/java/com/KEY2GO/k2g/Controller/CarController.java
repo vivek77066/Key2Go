@@ -6,6 +6,7 @@ import com.KEY2GO.k2g.Service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,20 +44,29 @@ public class CarController {
 
     // Add a new car
     @PostMapping
-    public Car addCar(@RequestBody Car car) {
-        return carService.addCar(car);
+    public ResponseEntity<Car> addCar(
+            @RequestPart("car") Car car,
+            @RequestPart(value = "carImage", required = false) MultipartFile carImage) {
+        Car savedCar = carService.addCar(car, carImage);
+        return ResponseEntity.ok(savedCar);
     }
+
+
 
     // Update car details
     @PutMapping("/{id}")
-    public ResponseEntity<Car> updateCar(@PathVariable int id, @RequestBody Car carDetails) {
+    public ResponseEntity<Car> updateCar(
+            @PathVariable int id,
+            @RequestPart("car") Car carDetails,
+            @RequestPart(value = "carImage", required = false) MultipartFile carImage) {
         try {
-            Car updatedCar = carService.updateCar(id, carDetails);
+            Car updatedCar = carService.updateCar(id, carDetails, carImage);
             return ResponseEntity.ok(updatedCar);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
+
 
     // Delete a car
     @DeleteMapping("/{id}")
@@ -69,8 +79,12 @@ public class CarController {
     public List<CarCompany> getAllCompany() {
         return carService.findAllCompany();
     }
-    @PostMapping("/company")
-    public CarCompany addCarComapny(@RequestBody CarCompany carCompany) {
-        return carService.addCarCompany(carCompany);
+    @PostMapping("/Company")
+    public ResponseEntity<CarCompany> addCarCompany(
+            @RequestPart("carCompany") CarCompany carCompany,
+            @RequestPart(value = "carComImg", required = false) MultipartFile carComImg) {
+        CarCompany savedCompany = carService.addCarCompany(carCompany, carComImg);
+        return ResponseEntity.ok(savedCompany);
     }
+
 }

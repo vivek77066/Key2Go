@@ -25,9 +25,11 @@ public class Car {
     private int seatingCapacity;
     @Column
     private double rentPerDay;
+    @Column
+    private String carImg;
 
 
-    public Car(String carName, String carNumber, String carColor, CarCompany carCompany, String fuelType , int seatingCapacity , double rentPerDay) {
+    public Car(String carName, String carNumber, String carColor, CarCompany carCompany, String fuelType , int seatingCapacity , double rentPerDay , String carImg) {
         this.carName = carName;
         this.carNumber = carNumber;
         this.carColor = carColor;
@@ -35,6 +37,7 @@ public class Car {
         this.fuelType =fuelType;
         this.seatingCapacity=seatingCapacity;
         this.rentPerDay=rentPerDay;
+        this.carImg=carImg;
     }
     public Car(){}
 
@@ -101,5 +104,13 @@ public class Car {
 
     public void setRentPerDay(double rentPerDay) {
         this.rentPerDay = rentPerDay;
+    }
+
+    public String getCarImg() {
+        return carImg;
+    }
+
+    public void setCarImg(String carImg) {
+        this.carImg = carImg;
     }
 }
