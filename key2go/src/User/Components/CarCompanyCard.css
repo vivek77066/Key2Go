@@ -1,4 +1,4 @@
-.car-type-wrapper {
+/* .car-type-wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
@@ -38,4 +38,31 @@
     margin-top: 10px;
     color: #333;
   }
-  
+   */
+
+/* CarCompanyCard.css */
+.car-company-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.car-company-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.car-company-card:hover {
+  transform: scale(1.05);
+}
+
+.company-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}

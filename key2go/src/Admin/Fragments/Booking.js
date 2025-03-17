@@ -29,9 +29,7 @@ function Bookings() {
           <thead>
             <tr>
               <th>Booking ID</th>
-              <th>Car Variant</th>
-              <th>Booking Date</th>
-              <th>Pickup Location</th>
+              <th>Car Name</th>
               <th>User Name</th>
               <th>From Date</th>
               <th>To Date</th>
@@ -44,9 +42,7 @@ function Bookings() {
       <tr key={db.bookingId}>  
         <td>{db.bookingId}</td>  
         <td>{db.car.carName}</td> 
-        <td>{db.fromDate}</td> 
-        <td>{db.address}</td> 
-        <td>{db.user.username}</td>  
+        <td>{db.user.username}</td> 
         <td>{db.fromDate}</td>  
         <td>{db.toDate}</td>  
         <td>{db.totalAmount}</td> 

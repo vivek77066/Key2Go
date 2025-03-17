@@ -2,25 +2,25 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { url } from "../../Commons/constants";
 import { useNavigate } from "react-router-dom";
-import "./CarCategoriesFragment.css";
+import "./CarCompanyFragment.css";
 import { Button } from "react-bootstrap";
 
 const CarCategory = () => {
   const navigate = useNavigate();
-  const [cars, setCars] = useState([]);
-  const [carCatImg, setCarCatImg] = useState(undefined);
-  const [categoryName, setCategoryName] = useState("");
+  const [carComImg, setCarComImg] = useState(undefined);
+  const [carCompany , setCarCompany] = useState([])
+  const [companyName, setCompanyName] = useState("");
   const [showForm, setShowForm] = useState(false); // Controls form visibility
 
   useEffect(() => {
-    GetAllCars();
+    GetAllCompanies();
   }, []);
 
-  const GetAllCars = () => {
-    axios.get(url + "/api/cars")
+  const GetAllCompanies = () => {
+    axios.get(url + "/api/cars/company")
       .then((response) => {
         console.log("GetAllCars API Response:", response.data);
-        setCars(Array.isArray(response.data) ? response.data : []);
+        setCarCompany(Array.isArray(response.data) ? response.data : []);
       })
       .catch((error) => {
         console.error("Error fetching cars:", error);
@@ -29,23 +29,24 @@ const CarCategory = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!carCatImg || !categoryName) {
+    if (!carComImg || !companyName) {
       alert("Please fill in all fields.");
       return;
     }
 
     const data = new FormData();
-    data.append("carCatImg", carCatImg);
-    data.append("categoryName", categoryName);
+    data.append("carComImg", carComImg);
+    data.append("companyName", companyName);
+    console.log(data)
 
-    axios.post(url + "/api/cars", data)
+    axios.post(url + "/api/cars/Company", data)
       .then((response) => {
         if (response.data) {
           alert("Car added successfully");
-          GetAllCars();
+          GetAllCompanies();
           setShowForm(false); // Close form after success
-          setCategoryName(""); // Clear form inputs
-          setCarCatImg(undefined);
+          setCompanyName(""); // Clear form inputs
+          setCarComImg(undefined);
         } else {
           alert("Error while adding");
         }
@@ -64,43 +65,27 @@ const CarCategory = () => {
     setShowForm(false); // Hide the form
   };
 
-  const deleteCar = (id) => {
-    axios.delete(url + `/api/cars/${id}`)
-      .then((res) => {
-        if (res.data) {
-          alert("Car deleted successfully");
-          GetAllCars();
-        } else {
-          alert("Error while deleting");
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting car:", error);
-        alert("Error while deleting");
-      });
-  };
-
   return (
     <div className="cccontainer">
       <h2>Car Company</h2>
       <hr />
 
       {/* Add New Car Button */}
-      <button className="add-car-btn" onClick={handleAddCar}>Add New Car</button>
+      <button className="add-car-btn" onClick={handleAddCar}>Add New Company</button>
 
       {/* Form to Add New Car */}
       {showForm && (
         <div className="form-popup">
-          <h3>Add New Car</h3>
+          <h3>Add New Company</h3>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Car Name</label>
-              <input type="text" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} required />
+              <label>Car Company name</label>
+              <input type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} required />
             </div>
 
             <div className="form-group">
               <label>Car Company Image</label>
-              <input type="file" onChange={(e) => setCarCatImg(e.target.files[0])} accept="image/*" required />
+              <input type="file" onChange={(e) => setCarComImg(e.target.files[0])} accept="image/*" required />
             </div>
 
             <div className="form-actions">
@@ -111,25 +96,22 @@ const CarCategory = () => {
         </div>
       )}
 
-      <h2>Available Cars</h2>
+      <h2>Available Companies</h2>
       <table className="custom-table">
         <thead>
           <tr>
             <th>Image</th>
             <th>Car Company</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {cars.map((car) => (
-            <tr key={car.carId}>
+          {carCompany.map((company) => (
+            <tr key={company.carCompanyId}>
               <td>
-                <img className="car-image" src={`${url}/${car.carCompanyId.carComImg}`} alt={car.carName} />
+                <img className="car-image" src={`${url}/${company.carCompanyId.carComImg}`} alt={company.carName} />
               </td>
-              <td>{car.carCompanyId.companyName}</td>  
-              <td>
-                <button className="btn-delete" onClick={() => deleteCar(car.carId)}>Delete</button>
-              </td>
+              <td>{company.companyName}</td>  
+              
             </tr>
           ))}
         </tbody>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { url } from "../../../Commons/constants";
 import BookingRow from "../../Components/BookingRow";
-import { Header } from "../../Components/Header";
+import  Header  from "../../Components/Header";
 import "./MyBookings.css"; // Importing the CSS file
 
 function MyBookings() {
@@ -18,9 +18,9 @@ function MyBookings() {
   }, []);
 
   const getBookings = () => {
-    axios.get(url + "/api/booking/findByUser/" + user.data.userid).then((response) => {
+    axios.get(url + "/api/bookings/" + user.data.userId).then((response) => {
       const result = response.data;
-      if (result.status === "success") {
+      if (result!=null) {
         setBookings(result.data);
         console.log("After API call ->", result);
       } else {
@@ -34,12 +34,12 @@ function MyBookings() {
     if (!booking.status) {
       alert("Booking is not confirmed yet...!");
     } else {
-      axios.get(url + "/booking/" + booking.bookingid).then((response) => {
+      axios.get(url + "/api/bookings/user/" + booking.user.userId).then((response) => {
         const result = response.data;
         if (result!=null) {
           console.log(result);
           history.push("/booking_details", {
-            bookingDetails: result,
+            bookingDetails: result.data,
           });
         } else {
           alert("Error occurred while getting bookings");
@@ -53,7 +53,7 @@ function MyBookings() {
     if (booking.status) {
       alert("Booking is confirmed");
     } else {
-      axios.delete(url + "/booking/" + booking.bookingid).then((response) => {
+      axios.delete(url + "/api/bookings/user/" + booking.user.userId).then((response) => {
         const result = response.data;
         if (result!=null) {
           console.log(result.status);
@@ -88,7 +88,7 @@ function MyBookings() {
           <tbody>
             {bookings.map((booking) => (
               <BookingRow
-                key={booking.bookingId}
+                key={booking.bookingid}
                 booking={booking}
                 deleteBooking={cancelBooking}
                 bookingDetail={bookingDetail}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { Header } from "../../Components/Header";
+import  Header  from "../../Components/Header";
 import { url } from "../../../Commons/constants";
 import axios from "axios";
 import "./BookingDetails.css"; // Import the CSS file
@@ -14,10 +14,10 @@ function BookingDetails() {
   useEffect(() => {
     if (!conBooking) return;
 
-    axios.get(url + "/api/bookings/all" + conBooking.bookingId).then((response) => {
+    axios.get(url + "/api/bookings/" + conBooking.bookingid).then((response) => {
       const result = response.data;
       if (result!=null) {
-        setBooking(result);
+        setBooking(result.data);
         sessionStorage.setItem("conBooking", JSON.stringify(result));
       } else {
         alert("Error occurred while getting bookings");
@@ -30,8 +30,8 @@ function BookingDetails() {
       <Header />
       <div className="card container">
         <h1 className="title-header">Booking Details</h1>
-     
-        {booking && booking.bookingId ? (
+
+        {booking && booking.bookingid ? (
           <table className="booking-table">
             <thead>
               <tr>
@@ -50,7 +50,7 @@ function BookingDetails() {
               </tr>
               <tr>
                 <th>Booking ID</th>
-                <td>{booking.bookingId}</td>
+                <td>{booking.bookingid}</td>
                 <th>Car Number</th>
                 <td>{booking.carNumber}</td>
               </tr>
@@ -75,7 +75,8 @@ function BookingDetails() {
               <tr>
                 <th>Bill Amount</th>
                 <td>{booking.amount} Rs.</td>
-                
+                <th>Advance Pay</th>
+                <td>{booking.securityDeposit} Rs.</td>
               </tr>
             </tbody>
           </table>

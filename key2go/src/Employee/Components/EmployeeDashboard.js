@@ -21,7 +21,7 @@ import HomeFragment from "../Fragments/HomeFragment";
 import CarFragment from "../Fragments/CarFragments";
 import Logout from "../Fragments/Logout";
 import Booking from "../Fragments/Booking";
-import CarCategoriesFragment from "../Fragments/CarCategoriesFragment";
+import CarCompanyFragment from "../Fragments/CarCompanyFragment";
 
 const drawerWidth = 240;
 
@@ -81,7 +81,7 @@ export default function EmployeeDashboard() {
       case "Logout":
         return <Logout />;
       case "CarCompanyFragment":
-        return <CarCategoriesFragment />;
+        return <CarCompanyFragment />;
       case "CarFragment":
         return <CarFragment />;
       default:

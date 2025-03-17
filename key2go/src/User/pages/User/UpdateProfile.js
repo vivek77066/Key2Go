@@ -5,7 +5,7 @@ import { url } from "../../../Commons/constants";
 import "./UpdateProfile.css"; // Importing the CSS file
 
 const UpdateProfile = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   let user = JSON.parse(sessionStorage.getItem("user"));
 
   const [username, setUserName] = useState("");
@@ -26,7 +26,7 @@ const UpdateProfile = () => {
     data.append("address", updatedAddress);
 
     axios
-      .put(`${url}/api/users/${user.data.userid}`, data)
+      .put(`${url}/api/users/${user.data.userId}`, data)
       .then((response) => {
         setLoading(false);
         const result = response.data;
@@ -45,7 +45,7 @@ const UpdateProfile = () => {
           };
 
           sessionStorage.setItem("user", JSON.stringify(updatedUser));
-          history.push("/");
+          navigate("/");
         } else {
           alert("Error while updating");
         }
@@ -98,7 +98,7 @@ const UpdateProfile = () => {
 
         <div className="btn-group">
           <button onClick={updateUserInDB} className="btn btn-success">Update</button>
-          <button onClick={history.goBack} className="btn btn-warning">Back</button>
+          <button onClick={()=> {navigate(-1)}} className="btn btn-warning">Back</button>
         </div>
       </div>
     </div>

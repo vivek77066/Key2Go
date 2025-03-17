@@ -1,50 +1,14 @@
 import React from "react";
-import "./CarCard.css";
-import { url } from "../../Commons/constants";
+import "./CarCard.css"; // Import the normal CSS file
 
-const CarCard = ({ cars, onItemSelect }) => {
+const CarCard = ({ car, onCarClick }) => {
   return (
-    <div className="car-card-container">
-      {cars.map((car, index) => (
-        <div
-          key={index}
-          className="car-card"
-          onClick={() => onItemSelect(car)}
-        >
-          <table className="car-table">
-            <tbody>
-              <tr className="car-info">
-                <td>
-                  <div className="car-fuel-type">{car.fuelType}</div>
-                </td>
-                <td>
-                  <div className="car-seat-capacity">{car.seatCapacity} Seats</div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan="2">
-                  <img
-                    src={`${url}/${car.carCatImg}`}
-                    className="car-image"
-                    alt="Car Category"
-                  />
-                </td>
-              </tr>
-              <tr className="car-info">
-                <td>
-                  <div className="car-details">
-                    <div className="car-type">{car.typeName}</div>
-                    <div className="car-category">{car.categoryName}</div>
-                  </div>
-                </td>
-                <td>
-                  <div className="car-price">{car.pricePerDay}/Day</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      ))}
+    <div className="car-card" onClick={() =>{ onCarClick(car.carId); console.log(car.carId) }}>
+      <img src={car.imageUrl} alt={car.name} className="car-image" />
+      <h3>{car.carName}</h3>
+      <p>Fuel Type: {car.fuelType}</p>
+      <p>Rent per Day: {car.rentPerDay} Rs.</p>
+      <p>Seating Capacity: {car.seatingCapacity}</p>
     </div>
   );
 };
