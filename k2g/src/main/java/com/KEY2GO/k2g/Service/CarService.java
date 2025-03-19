@@ -2,6 +2,7 @@ package com.KEY2GO.k2g.Service;
 
 import com.KEY2GO.k2g.Entity.Car;
 import com.KEY2GO.k2g.Entity.CarCompany;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,13 +14,13 @@ public interface CarService {
 
     public Optional<Car> getCarById(int id);
 
-    public Car addCar(Car car);
+    public void addCar(String carName, String carNumber, String carColor, String fuelType, int seatingCapacity, double rentPerDay,int carCompanyId,  MultipartFile carImage) throws Exception;
 
-    public Car updateCar(int id, Car carDetails);
+    public Car updateCar(int id, Car carDetails , MultipartFile carImg);
 
     public void deleteCar(int id);
 
     public List<CarCompany> findAllCompany();
 
-    public CarCompany addCarCompany(CarCompany carCompany);
+    public void saveCarCompany(MultipartFile carComImg, String companyName);
 }

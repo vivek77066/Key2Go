@@ -4,9 +4,12 @@ import com.KEY2GO.k2g.Entity.Car;
 import com.KEY2GO.k2g.Entity.CarCompany;
 import com.KEY2GO.k2g.Service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,17 +44,32 @@ public class CarController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Add a new car
-    @PostMapping
-    public Car addCar(@RequestBody Car car) {
-        return carService.addCar(car);
+    @PostMapping("/add")
+    public ResponseEntity<String> addCar(
+            @RequestParam("carName") String carName,
+            @RequestParam("carNumber") String carNumber,
+            @RequestParam("carColor") String carColor,
+            @RequestParam("fuelType") String fuelType,
+            @RequestParam("rentPerDay") double rentPerDay,
+            @RequestParam("seatingCapacity") int seatingCapacity,
+            @RequestParam("carCompanyId") int carCompanyId,
+            @RequestParam("carImg") MultipartFile carImg) {
+        try {
+            carService.addCar(carName, carNumber, carColor, fuelType,  seatingCapacity,rentPerDay  ,carCompanyId,carImg);
+            return ResponseEntity.ok("Car added successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error while adding");
+        }
     }
 
     // Update car details
     @PutMapping("/{id}")
-    public ResponseEntity<Car> updateCar(@PathVariable int id, @RequestBody Car carDetails) {
+    public ResponseEntity<Car> updateCar(
+            @PathVariable int id,
+            @RequestPart("car") Car carDetails,
+            @RequestPart(value = "carImage", required = false) MultipartFile carImage) {
         try {
-            Car updatedCar = carService.updateCar(id, carDetails);
+            Car updatedCar = carService.updateCar(id, carDetails, carImage);
             return ResponseEntity.ok(updatedCar);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
@@ -69,8 +87,15 @@ public class CarController {
     public List<CarCompany> getAllCompany() {
         return carService.findAllCompany();
     }
-    @PostMapping("/company")
-    public CarCompany addCarComapny(@RequestBody CarCompany carCompany) {
-        return carService.addCarCompany(carCompany);
+    @PostMapping("/Company")
+    public ResponseEntity<String> addCarCompany(
+            @RequestParam("carComImg") MultipartFile carComImg,
+            @RequestParam("companyName") String companyName) {
+        try {
+            carService.saveCarCompany(carComImg, companyName);
+            return ResponseEntity.ok("Car added successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error while adding BE");
+        }
     }
 }
