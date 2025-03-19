@@ -79,13 +79,11 @@ function Booking() {
           <TableHead>
             <TableRow>
               <StyledTableCell align="center">Booking ID</StyledTableCell>
-              <StyledTableCell align="center">Car Variants</StyledTableCell>
-              <StyledTableCell align="center">Booking Date</StyledTableCell>
-              <StyledTableCell align="center">Pickup Location</StyledTableCell>
+              <StyledTableCell align="center">Car</StyledTableCell>
               <StyledTableCell align="center">User Name</StyledTableCell>
-              <StyledTableCell align="center">Advance</StyledTableCell>
               <StyledTableCell align="center">From Date</StyledTableCell>
               <StyledTableCell align="center">To Date</StyledTableCell>
+              <StyledTableCell align="center">Total Bill</StyledTableCell>
               <StyledTableCell align="center">Action</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -94,14 +92,10 @@ function Booking() {
               <StyledTableRow key={db.bookingId}>
                 <StyledTableCell align="center">{db.bookingId}</StyledTableCell>
                 <StyledTableCell align="center">{db.car.carName}</StyledTableCell>
-                <StyledTableCell align="center">
-                  {new Date(db.fromDate).toDateString()}
-                </StyledTableCell>
-                <StyledTableCell align="center">{db.address}</StyledTableCell>
                 <StyledTableCell align="center">{db.user.username}</StyledTableCell>
-                <StyledTableCell align="center">{db.totalAmount / 2}</StyledTableCell>
                 <StyledTableCell align="center">{db.fromDate}</StyledTableCell>
                 <StyledTableCell align="center">{db.toDate}</StyledTableCell>
+                <StyledTableCell align="center">{db.totalAmount}</StyledTableCell>
                 <StyledTableCell align="center">
                   <button
                     onClick={() => navigate("/confirm_booking", { state: { booking: db } })}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import { url } from "../../Commons/constants";
+import "./CarFragments.css"
 
 const Car = () => {
   const [cars, setCars] = useState([]);
@@ -43,7 +44,6 @@ const Car = () => {
         setCars(response.data);
       } else {
         setCars([]);
-        console.error("Unexpected response format:", response.data);
       }
     } catch (error) {
       console.error("Error fetching cars:", error);
@@ -76,10 +76,7 @@ const Car = () => {
     formData.append("seatingCapacity", seatingCapacity);
     formData.append("carCompanyId", selectedCarCompany);
     formData.append("carImg", carImg);
-    console.log(selectedCarCompany)
-    console.log(carImg)
 
-    console.log(formData);
     await axios.post(url + "/api/cars/add", formData)
     .then((response) => {
       if (response.data) {
@@ -98,8 +95,7 @@ const Car = () => {
       alert("Car deleted successfully");
       fetchCars();
     } catch (error) {
-      alert("Error while deleting car");
-      console.error(error);
+      alert("This Car is Book for ride You cannot delete it !!!");
     }
   };
 
@@ -122,13 +118,13 @@ const Car = () => {
   };
 
   return (
-    <div className="container">
+    <div className="CARcontainer">
       <h4 className="page-header">Cars</h4>
       <div className="fcard">
         <div className="card-header">Add New Car</div>
         <button
           onClick={() => setShowRegister(true)}
-          className="btn btn-primary"
+          className="AddCarBtn"
         >
           Add Car
         </button>
@@ -260,7 +256,7 @@ const Car = () => {
       </div>
 
       <h4>Available Cars</h4>
-      <table className="table">
+      <table className="CARtable">
         <thead>
           <tr>
             <th>ID</th>
@@ -299,7 +295,7 @@ const Car = () => {
                     )}
                   </td>
                   <td>{car.carName}</td>
-                  <td>{car.carCompanyId?.companyName}</td>
+                  <td>{car.carCompany.companyName}</td>
                   <td>{car.carNumber}</td>
                   <td>{car.seatingCapacity}</td>
                   <td>{car.carColor}</td>

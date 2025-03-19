@@ -1,6 +1,9 @@
 package com.KEY2GO.k2g.Entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.engine.internal.Cascade;
 
 
 @Entity
@@ -14,6 +17,7 @@ public class Car {
     private String carName;
     @ManyToOne
     @JoinColumn(name = "CarCompanyId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private CarCompany carCompany;
     @Column
     private String carNumber;

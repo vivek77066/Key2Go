@@ -49,10 +49,7 @@ public class CarServiceImpl implements CarService{
         String imageFileName = diskStorageService.store(carImg);
 
         // Fetch the CarCompany entity
-        CarCompany carCompany = companyRepository.findById(carCompanyId)
-                .orElseThrow(() -> new Exception("CarCompany not found"));
-
-        System.out.println(carCompany);
+        CarCompany carCompany = companyRepository.findById(carCompanyId);
 
         // Create a new Car entity
         Car car = new Car();

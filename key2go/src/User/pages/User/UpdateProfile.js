@@ -16,33 +16,26 @@ const UpdateProfile = () => {
   const updateUserInDB = () => {
     setLoading(true);
 
-    const updatedUsername = username.trim() || user.data.username;
-    const updatedPhone = phone.trim() || user.data.phone;
-    const updatedAddress = address.trim() || user.data.address;
+    const updatedUsername = username.trim() || user.username;
+    const updatedPhone = phone.trim() || user.phone;
+    const updatedAddress = address.trim() || user.address;
 
-    const data = new FormData();
-    data.append("username", updatedUsername);
-    data.append("phone", updatedPhone);
-    data.append("address", updatedAddress);
+    const data = {
+      username: updatedUsername,
+      phone: updatedPhone,
+      address: updatedAddress,
+    };
 
     axios
-      .put(`${url}/api/users/${user.data.userId}`, data)
+      .put(`${url}/api/users/updateProfile/${user.userId}`, data)
       .then((response) => {
         setLoading(false);
         const result = response.data;
 
-        if (result!=null) {
+        if (result != null) {
           alert("Profile updated successfully");
 
-          const updatedUser = {
-            ...user,
-            data: {
-              ...user.data,
-              username: updatedUsername,
-              phone: updatedPhone,
-              address: updatedAddress,
-            },
-          };
+          const updatedUser =response.data; 
 
           sessionStorage.setItem("user", JSON.stringify(updatedUser));
           navigate("/");
@@ -65,14 +58,14 @@ const UpdateProfile = () => {
     <div className="update-profile-container">
       <div className="form-container">
         <h1 className="title-header">Update Profile</h1>
-        
+
         <div className="form-group">
           <label>User Name</label>
           <input
             type="text"
             className="form-control"
             onChange={(e) => setUserName(e.target.value)}
-            placeholder={user.data.username}
+            placeholder={user.username}
           />
         </div>
 
@@ -82,7 +75,7 @@ const UpdateProfile = () => {
             type="text"
             className="form-control"
             onChange={(e) => setPhone(e.target.value)}
-            placeholder={user.data.phone}
+            placeholder={user.phone}
           />
         </div>
 
@@ -92,13 +85,22 @@ const UpdateProfile = () => {
             type="text"
             className="form-control"
             onChange={(e) => setAddress(e.target.value)}
-            placeholder={user.data.address}
+            placeholder={user.address}
           />
         </div>
 
         <div className="btn-group">
-          <button onClick={updateUserInDB} className="btn btn-success">Update</button>
-          <button onClick={()=> {navigate(-1)}} className="btn btn-warning">Back</button>
+          <button onClick={updateUserInDB} className="btn btn-success">
+            Update
+          </button>
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="btn btn-warning"
+          >
+            Back
+          </button>
         </div>
       </div>
     </div>

@@ -5,22 +5,14 @@ import "./HomeFragment.css"; // Import CSS file
 
 const HomeFragment = () => {
   const [user, setUser] = useState(0);
-  const [carTypes, setCarTypes] = useState(0);
-  const [carCategories, setCarCategories] = useState(0);
+  const [carCompany, setCarCompany] = useState(0);
   const [bookings, setBookings] = useState(0);
   const [cars, setCars] = useState(0);
 
   useEffect(() => {
     axios
       .get(url + "/api/cars")
-      .then((res) => setCarTypes(res.data.length)||0) // Fix: Extract res.data
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(url + "/api/cars")
-      .then((res) => setCarCategories(res.data.length)||0) // Fix: Extract res.data
+      .then((res) => setCarCompany(res.data.length)||0) // Fix: Extract res.data
       .catch((err) => console.log(err));
   }, []);
 
@@ -51,7 +43,7 @@ const HomeFragment = () => {
       <div className="emrow">
         <div className="card_info">
           <h5>Total Car Companies</h5>
-          <p>{carCategories}</p>
+          <p>{carCompany}</p>
         </div>
         <div className="card_primary">
           <h5>Registered Users</h5>

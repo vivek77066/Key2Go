@@ -3,69 +3,96 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { url } from "../../../Commons/constants";
 import BookingRow from "../../Components/BookingRow";
-import  Header  from "../../Components/Header";
+import Header from "../../Components/Header";
 import "./MyBookings.css"; // Importing the CSS file
 
 function MyBookings() {
-  let user = JSON.parse(sessionStorage.getItem("user"));
+  const navigate = useNavigate();
 
-  console.log(user.data);
+  // 🔹 Use useState for user to handle delay in session storage retrieval
+  const [user, setUser] = useState(null);
   const [bookings, setBookings] = useState([]);
-  const history = useNavigate();
 
+  // 🔹 Fetch user from session storage when the component mounts
   useEffect(() => {
-    getBookings();
-  }, []);
+    const storedUser = JSON.parse(sessionStorage.getItem("user"));
+    if (storedUser) {
+      setUser(storedUser); // Set user after retrieval
+    } else {
+      alert("User not found. Please log in again.");
+      navigate("/login"); // Redirect to login if no user found
+    }
+  }, [navigate]);
+
+  // 🔹 Call getBookings only when user is available
+  useEffect(() => {
+    if (user) {
+      getBookings();
+    }
+  }, [user]);
 
   const getBookings = () => {
-    axios.get(url + "/api/bookings/" + user.data.userId).then((response) => {
-      const result = response.data;
-      if (result!=null) {
-        setBookings(result.data);
-        console.log("After API call ->", result);
-      } else {
-        alert("Error occurred while getting all car categories");
-        console.error(result.error);
-      }
-    });
+    axios
+      .get(url + "/api/bookings/user/" + user.userId)
+      .then((response) => {
+        const result = response.data;
+        if (result) {
+          setBookings(result.data);
+          console.log(result.data);
+        } else {
+          alert("Error occurred while getting all bookings.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching bookings:", error);
+      });
   };
 
   const bookingDetail = (booking) => {
     if (!booking.status) {
       alert("Booking is not confirmed yet...!");
     } else {
-      axios.get(url + "/api/bookings/user/" + booking.user.userId).then((response) => {
-        const result = response.data;
-        if (result!=null) {
-          console.log(result);
-          history.push("/booking_details", {
-            bookingDetails: result.data,
-          });
-        } else {
-          alert("Error occurred while getting bookings");
-        }
-      });
+      axios
+        .get(url + "/api/bookings/user/" + booking.user.userId)
+        .then((response) => {
+          const result = response.data;
+          if (result) {
+            console.log(result);
+            navigate("/booking_details", {
+              state: { bookingDetails: result.data },
+            });
+          } else {
+            alert("Error occurred while getting bookings");
+          }
+        });
     }
   };
 
   const cancelBooking = (booking) => {
-    console.log(booking);
     if (booking.status) {
       alert("Booking is confirmed");
     } else {
-      axios.delete(url + "/api/bookings/user/" + booking.user.userId).then((response) => {
-        const result = response.data;
-        if (result!=null) {
-          console.log(result.status);
-          alert("Booking cancelled");
-          window.location.reload();
-        } else {
-          alert("Error occurred while canceling bookings");
-          console.error(result.error);
-        }
-      });
+      axios
+        .delete(url + "/api/bookings/user/" + booking.user.userId)
+        .then((response) => {
+          const result = response.data;
+          if (result) {
+            alert("Booking cancelled");
+            setBookings(bookings.filter((b) => b.bookingid !== booking.bookingid)); // Update state instead of reload
+          } else {
+            alert("Error occurred while canceling bookings");
+          }
+        })
+        .catch((error) => {
+          console.error("Error canceling booking:", error);
+        });
     }
   };
+
+  if (!user) {
+    return <h1 className="loading-text">Loading user data...</h1>; // Handle loading state
+  }
+  
 
   return (
     <div className="my-bookings-container">
