@@ -74,15 +74,54 @@
   color: black;
 }
 
-/* Dropdown Styling */
-.dropdown-link {
-  text-decoration: none;
+#dropdown-basic-button {
+  margin-top: -12px;
+  background-color: rgb(139, 195, 255); 
   color: black;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  border: none;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#dropdown-basic-button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* Styling the dropdown menu */
+.dropdown-menu {
+  background-color: rgb(186, 210, 255);
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+  padding: 10px 0;
+  position: absolute;
+  z-index: 1000;
+}
+
+/* Styling dropdown items */
+.dropdown-menu .dropdown-item {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none; /* Remove underline */
+  display: block;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+/* Ensure links inside dropdown do not have underline */
+.dropdown-link {
+  color: inherit; /* Keep the default text color */
+  text-decoration: none; /* Remove underline */
+  display: block;
+  width: 100%;
 }
 
 .dropdown-link:hover {
-  color: #007bff;
+  text-decoration: none;
 }

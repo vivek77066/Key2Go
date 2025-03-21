@@ -1,4 +1,3 @@
-"use client"
 
 import axios from "axios"
 import { useState, useEffect } from "react"
@@ -21,6 +20,7 @@ const BookingForm = () => {
   // Retrieve session values
   const isActive = sessionStorage.getItem("isActive")
   const user = JSON.parse(sessionStorage.getItem("user"))
+  
 
   useEffect(() => {
     // Authentication check - do this first before any other operations
@@ -108,7 +108,7 @@ const BookingForm = () => {
     }
 
     const bookingData = {
-      user: { userId: user.data.userid },
+      user: { userId: user.userId },
       car: { carId: Number.parseInt(carId) },
       fromDate: fromDate,
       toDate: toDate,
@@ -117,7 +117,7 @@ const BookingForm = () => {
 
     try {
       const response = await axios.post(`${url}/api/bookings/book`, bookingData)
-      if (response.data.status === "success") {
+      if (response!=null) {
         alert("Booking Confirmed!")
         navigate("/")
       } else {
@@ -132,7 +132,7 @@ const BookingForm = () => {
   return (
     <div>
       <Header />
-      <div className="container">
+      <div className="Booking_container">
         <h1 className="title-header">Booking Form</h1>
         <hr />
 
@@ -142,19 +142,19 @@ const BookingForm = () => {
           </u>
         </h2>
 
-        <div className="form-container">
+        <div className="Booking_form-container">
           <div className="form-group">
             <label>
               <b>Name:</b>
             </label>
-            <input type="text" className="form-control" value={user.data.username} readOnly />
+            <input type="text" className="form-control" value={user.username} readOnly />
           </div>
 
           <div className="form-group">
             <label>
               <b>Email:</b>
             </label>
-            <input type="text" className="form-control" value={user.data.email} readOnly />
+            <input type="text" className="form-control" value={user.email} readOnly />
           </div>
 
           <div className="form-group">

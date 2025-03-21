@@ -1,69 +1,47 @@
-/* .car-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-  }
-  
-  .car-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    background-color: white;
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
-    width: 250px;
-    text-align: center;
-  }
-  
-  .car-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .car-table {
-    width: 100%;
-  }
-  
-  .car-info {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .car-fuel-type, .car-seat-capacity, .car-type, .car-category {
-    color: #333;
-  }
-  
-  .car-image {
-    width: 100%;
-    border-radius: 5px;
-    margin: 10px 0;
-  }
-  
-  .car-price {
-    font-size: 18px;
-    color: #ff4000;
-    font-weight: bold;
-  }
-   */
-/* CarCard.css */
-.car-card {
+.CarCardContainer{
+  display: flex;
+  flex-direction: row;
+}
+.CarCard_card {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  text-align: center;
-  width: 200px;
-  margin: 20px;
-  cursor: pointer;
-  transition: transform 0.3s;
+  padding: 15px;
+  width: fit-content;
+  height: 300px;
+  width: 300px;
+
 }
 
-.car-card:hover {
-  transform: scale(1.05);
+.CarCard_image {
+  width: 150px; 
+  height: 100%; 
+  object-fit: cover; 
 }
 
-.car-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
+.CarCard_info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
 }
+/* Hover effect *
+.CarCard_card:hover {
+  transform: scale(1.03);
+}
+
+
+
+
+
+
+/* Container for car cards *
+.CarCard_container {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping *
+  gap: 20px; /* Equal spacing between cards *
+  justify-content: flex-start; /* Align cards in a row *
+  overflow-x: auto; 
+  padding: 10px;
+} */

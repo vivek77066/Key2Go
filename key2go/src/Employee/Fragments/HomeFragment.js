@@ -11,7 +11,7 @@ const HomeFragment = () => {
 
   useEffect(() => {
     axios
-      .get(url + "/api/cars")
+      .get(url + "/api/cars/company")
       .then((res) => setCarCompany(res.data.length)||0) // Fix: Extract res.data
       .catch((err) => console.log(err));
   }, []);

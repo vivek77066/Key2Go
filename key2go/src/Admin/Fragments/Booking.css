@@ -1,41 +1,63 @@
-.container {
-    width: 90%;
-    margin: auto;
-    text-align: center;
+.Admin_Booking_container {
+  width: 90%;
+  margin: auto;
+  text-align: center;
+}
+
+.title-header {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.Admin_Booking_table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 15px;
+}
+
+.Admin_Booking_custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.Admin_Booking_custom-table th,
+.Admin_Booking_custom-table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+  white-space: nowrap;
+  /* Prevents text from wrapping */
+}
+
+.Admin_Booking_custom-table th {
+  background-color: #384b5e;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.Admin_Booking_custom-table tr:nth-child(odd) {
+  background-color: #f4f6f8;
+}
+
+.Admin_Booking_custom-table tr:hover {
+  background-color: #e0e7ff;
+  transition: 0.3s ease-in-out;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+
+  .Admin_Booking_custom-table th,
+  .Admin_Booking_custom-table td {
+    padding: 8px;
+    font-size: 14px;
   }
-  
-  .title-header {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .table-container {
-    overflow-x: auto;
-    margin-top: 20px;
-  }
-  
-  .custom-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  .custom-table th, .custom-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .custom-table th {
-    background-color: black;
-    color: white;
-  }
-  
-  .custom-table tr:nth-child(odd) {
-    background-color: #f9f9f9;
-  }
-  
-  .custom-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
+}

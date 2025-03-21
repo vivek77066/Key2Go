@@ -30,7 +30,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const CarCategory = () => {
   const navigate = useNavigate();
-  const [carComImg, setCarComImg] = useState(undefined);
+  const [carComImg1, setCarComImg1] = useState(undefined);
   const [carCompany , setCarCompany] = useState([])
   const [companyName, setCompanyName] = useState("");
   const [showForm, setShowForm] = useState(false); // Controls form visibility
@@ -43,6 +43,7 @@ const CarCategory = () => {
     axios.get(url + "/api/cars/company")
       .then((response) => {
         setCarCompany(Array.isArray(response.data) ? response.data : []);
+        
       })
       .catch((error) => {
         console.error("Error fetching cars:", error);
@@ -51,11 +52,11 @@ const CarCategory = () => {
   const HandleDeleteCompany =
     async (id) => {
       try {
-        await axios.delete(url + `/api/cars/${id}`);
-        alert("Car deleted successfully");
+        await axios.delete(url + `/api/cars/company/${id}`);
+        alert("Car Company deleted successfully");
         GetAllCompanies();
       } catch (error) {
-        alert("Error while deleting car");
+        alert("Error while deleting...");
         console.error(error);
       }
     };
@@ -63,13 +64,13 @@ const CarCategory = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!carComImg || !companyName) {
+    if (!carComImg1 || !companyName) {
       alert("Please fill in all fields.");
       return;
     }
 
     const data = new FormData();
-    data.append("carComImg", carComImg);
+    data.append("carComImg", carComImg1);
     data.append("companyName", companyName);
     console.log(data)
 
@@ -80,7 +81,7 @@ const CarCategory = () => {
           GetAllCompanies();
           setShowForm(false); // Close form after success
           setCompanyName(""); // Clear form inputs
-          setCarComImg(undefined);
+          setCarComImg1(undefined);
         } else {
           alert("Error while adding");
         }
@@ -119,7 +120,7 @@ const CarCategory = () => {
 
             <div className="form-group">
               <label>Car Company Image</label>
-              <input type="file" onChange={(e) => setCarComImg(e.target.files[0])} accept="image/*" required />
+              <input type="file" onChange={(e) => setCarComImg1(e.target.files[0])} accept="image/*" required />
             </div>
 
             <div className="form-actions">
@@ -142,8 +143,13 @@ const CarCategory = () => {
           </TableHead>
           <TableBody>
             {carCompany.map((db) => (
+              console.log(db.carComImg),
               <StyledTableRow key={db.carCompanyId}>
-                <StyledTableCell align="center">{db.carComImg}</StyledTableCell>
+                <StyledTableCell align="center"> <img
+                    style={{ height: "300px", width: "400px" }}
+                    src={url + "/" + db.carComImg}
+                    alt={db.companyName}
+                  /></StyledTableCell>
                 <StyledTableCell align="center">{db.companyName}</StyledTableCell>
                 <StyledTableCell align="center">
                   <button

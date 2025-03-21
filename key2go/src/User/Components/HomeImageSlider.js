@@ -45,7 +45,7 @@ const HomeImageSlider = () => {
               className={`carousel-slide ${index === currentIndex ? "active" : ""}`}
             >
               <img src={img} alt={`Slide ${index + 1}`} className="slider-image" />
-              <Link className="carousel-button" to="/car_type">
+              <Link className="carousel-button" to="/all_carCompany">
                 Let's GO!
               </Link>
             </div>

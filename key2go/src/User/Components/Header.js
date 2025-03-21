@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import "./Header.css"; 
@@ -6,9 +6,10 @@ import "./Header.css";
 const Header = () => {
   const [username, setUserName] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
   useEffect(() => {
-    // Check authentication status only once when component mounts
     const checkAuthStatus = () => {
       const isActive = sessionStorage.getItem("isActive");
       const user = JSON.parse(sessionStorage.getItem("user"));
@@ -22,7 +23,13 @@ const Header = () => {
     };
     
     checkAuthStatus();
-  }, []); // Empty dependency array ensures this runs only once on mount
+  }, []);
+
+  const handleToggle = (event) => {
+    event.stopPropagation(); 
+    setShowDropdown((prev) => !prev); 
+  };
+
 
   return (
     <div className="nav-header">
@@ -49,30 +56,24 @@ const Header = () => {
                 <li><Link className="nav-btn login-btn" to="/signin">Login</Link></li>
               </>
             ) : (
-              <li>
+              <li ref={dropdownRef}>
                 <DropdownButton 
                   title={<span>{username}</span>} 
                   id="dropdown-basic-button"
+                  show={showDropdown}
+                  onClick={handleToggle}
                 >
                   <Dropdown.Item>
-                    <Link className="dropdown-link" to="/all_carCompany">
-                      Book New Ride
-                    </Link>
+                    <Link className="dropdown-link" to="/all_carCompany">Book New Ride</Link>
                   </Dropdown.Item>
                   <Dropdown.Item>
-                    <Link className="dropdown-link" to="/my_bookings">
-                      My Booking 
-                    </Link>
+                    <Link className="dropdown-link" to="/my_bookings">My Booking</Link>
                   </Dropdown.Item>
                   <Dropdown.Item>
-                    <Link className="dropdown-link" to="/update_profile">
-                      Update Profile 
-                    </Link>
+                    <Link className="dropdown-link" to="/update_profile">Update Profile</Link>
                   </Dropdown.Item>
                   <Dropdown.Item>
-                    <Link className="dropdown-link" to="/signoff">
-                      Logout
-                    </Link>
+                    <Link className="dropdown-link" to="/signoff">Logout</Link>
                   </Dropdown.Item>
                 </DropdownButton>
               </li>

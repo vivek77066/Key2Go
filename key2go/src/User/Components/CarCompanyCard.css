@@ -55,6 +55,8 @@
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s;
+  height: 300px;
+  width: 300px;
 }
 
 .car-company-card:hover {

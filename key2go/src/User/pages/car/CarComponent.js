@@ -90,9 +90,9 @@ export default function CarComponent() {
   return (
     <>
       <Header />
-      <div className="car-container">
-        <h1 className="title-header">Cars</h1>
-        <div className="car-cards">
+      <div className="car_component_container">
+        <h1 className="title_component_header">Cars</h1>
+        <div className="car_component_cards">
           {cars.map((car) => (
             <CarCard key={car.carId} car={car} onCarClick={handleCarClick} />
           ))}

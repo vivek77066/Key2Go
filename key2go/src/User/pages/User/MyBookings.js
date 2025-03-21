@@ -4,20 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { url } from "../../../Commons/constants";
 import BookingRow from "../../Components/BookingRow";
 import Header from "../../Components/Header";
-import "./MyBookings.css"; // Importing the CSS file
+import "./MyBookings.css"; 
 
 function MyBookings() {
   const navigate = useNavigate();
 
-  // 🔹 Use useState for user to handle delay in session storage retrieval
   const [user, setUser] = useState(null);
   const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // 🔹 Fetch user from session storage when the component mounts
   useEffect(() => {
     const storedUser = JSON.parse(sessionStorage.getItem("user"));
     if (storedUser) {
-      setUser(storedUser); // Set user after retrieval
+      setUser(storedUser); 
     } else {
       alert("User not found. Please log in again.");
       navigate("/login"); // Redirect to login if no user found
@@ -32,19 +31,28 @@ function MyBookings() {
   }, [user]);
 
   const getBookings = () => {
+    setLoading(true);
     axios
       .get(url + "/api/bookings/user/" + user.userId)
       .then((response) => {
         const result = response.data;
         if (result) {
-          setBookings(result.data);
-          console.log(result.data);
+          // Check if result.data exists, if not use result directly
+          const bookingsData = result.data || result;
+          setBookings(Array.isArray(bookingsData) ? bookingsData : []);
+          console.log("Bookings loaded:", bookingsData);
         } else {
-          alert("Error occurred while getting all bookings.");
+          console.log("No bookings found or empty response");
+          setBookings([]);
         }
       })
       .catch((error) => {
         console.error("Error fetching bookings:", error);
+        setBookings([]);
+        alert("Error occurred while getting bookings. Please try again.");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -58,34 +66,33 @@ function MyBookings() {
           const result = response.data;
           if (result) {
             console.log(result);
+            // Check if result.data exists, if not use result directly
+            const bookingDetails = result.data || result;
             navigate("/booking_details", {
-              state: { bookingDetails: result.data },
+              state: { bookingDetails: bookingDetails },
             });
           } else {
             alert("Error occurred while getting bookings");
           }
+        })
+        .catch((error) => {
+          console.error("Error fetching booking details:", error);
+          alert("Error occurred while getting booking details");
         });
     }
   };
 
   const cancelBooking = (booking) => {
     if (booking.status) {
-      alert("Booking is confirmed");
+      alert("Booking is confirmed , You Can not cancel it");
     } else {
       axios
-        .delete(url + "/api/bookings/user/" + booking.user.userId)
+        .delete(url + "/api/bookings/" + booking.bookingId)
         .then((response) => {
           const result = response.data;
-          if (result) {
-            alert("Booking cancelled");
-            setBookings(bookings.filter((b) => b.bookingid !== booking.bookingid)); // Update state instead of reload
-          } else {
-            alert("Error occurred while canceling bookings");
-          }
+          alert("Booking deleted successfully ...")
+          navigate(-1)
         })
-        .catch((error) => {
-          console.error("Error canceling booking:", error);
-        });
     }
   };
 
@@ -93,6 +100,9 @@ function MyBookings() {
     return <h1 className="loading-text">Loading user data...</h1>; // Handle loading state
   }
   
+  if (loading) {
+    return <h1 className="loading-text">Loading bookings...</h1>;
+  }
 
   return (
     <div className="my-bookings-container">
@@ -100,29 +110,34 @@ function MyBookings() {
       <h1 className="title-header">My Bookings</h1>
       <hr />
       <div className="nav-container">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Booking ID</th>
-              <th>Customer Name</th>
-              <th>Car Name</th>
-              <th>From Date</th>
-              <th>To Date</th>
-              <th>Booking Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookings.map((booking) => (
-              <BookingRow
-                key={booking.bookingid}
-                booking={booking}
-                deleteBooking={cancelBooking}
-                bookingDetail={bookingDetail}
-              />
-            ))}
-          </tbody>
-        </table>
+        {bookings.length === 0 ? (
+          <div className="no-bookings-message">
+            <p>You don't have any bookings yet.</p>
+          </div>
+        ) : (
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Customer Name</th>
+                <th>Car Name</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookings.map((booking) => (
+                <BookingRow
+                  key={booking.bookingId}
+                  booking={booking}
+                  deleteBooking={cancelBooking}
+                  bookingDetail={bookingDetail}
+                />
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

@@ -53,21 +53,20 @@ const Users = () => {
       if (Array.isArray(result)) {
         setUsers(result);
       } else {
-        setUsers([]);  // Set an empty array to prevent errors
+        setUsers([]); // Set an empty array to prevent errors
       }
-     
     });
   };
 
   return (
-    <div className="container">
+    <div className="User_container">
       <div className="page-heading">
         <h1 className="title">Users Overview</h1>
       </div>
-     
+
       <h4>User List:</h4>
       <TableContainer component={Paper} className="table-container">
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table sx={{ minWidth: 700 }} className="Admin_customized_table">
           <TableHead>
             <TableRow>
               <StyledTableCell align="center">User Name</StyledTableCell>
@@ -78,30 +77,33 @@ const Users = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-
-  {Array.isArray(users) && users.length > 0 ? (
-    users.map((db) => (
-      <StyledTableRow key={db.id}>
-        <StyledTableCell align="center">{db.username}</StyledTableCell>
-        <StyledTableCell align="center">{db.phone}</StyledTableCell>
-        <StyledTableCell align="center">{db.email}</StyledTableCell>
-        <StyledTableCell align="center">{db.address}</StyledTableCell>
-        <StyledTableCell align="center">
-          <button onClick={() => deleteUser(db.id)} className="btn btn-warning">
-            Delete User
-          </button>
-        </StyledTableCell>
-      </StyledTableRow>
-    ))
-  ) : (
-    <StyledTableRow>
-      <StyledTableCell colSpan={5} align="center">
-        No users found.
-      </StyledTableCell>
-    </StyledTableRow>
-  )}
-</TableBody>
-
+            {Array.isArray(users) && users.length > 0 ? (
+              users.map((db) => (
+                <StyledTableRow key={db.id}>
+                  <StyledTableCell align="center">
+                    {db.username}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">{db.phone}</StyledTableCell>
+                  <StyledTableCell align="center">{db.email}</StyledTableCell>
+                  <StyledTableCell align="center">{db.address}</StyledTableCell>
+                  <StyledTableCell align="center">
+                    <button
+                      onClick={() => deleteUser(db.id)}
+                      className="Delete_User"
+                    >
+                      Delete User
+                    </button>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))
+            ) : (
+              <StyledTableRow>
+                <StyledTableCell colSpan={5} align="center">
+                  No users found.
+                </StyledTableCell>
+              </StyledTableRow>
+            )}
+          </TableBody>
         </Table>
       </TableContainer>
     </div>

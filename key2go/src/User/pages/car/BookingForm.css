@@ -1,59 +1,75 @@
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .title-header {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 15px;
-  }
-  
-  .form-container {
-    margin-top: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .btn-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-  }
-  
-  .btn-warning {
-    background-color: #ffc107;
-    color: black;
-  }
-  
+
+.Booking_container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the form */
+}
+
+.title-header {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.Booking_form-container {
+  margin-top: 20px;
+  width: 90%; /* Ensures it fits well inside the container */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers form content */
+}
+
+.form-group {
+  width: 100%; /* Ensures form elements align properly */
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px; /* Slightly smaller labels */
+}
+
+.form-control {
+  width: 100%;
+  padding: 6px; /* Reduced padding */
+  font-size: 14px; /* Smaller font */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.btn {
+  padding: 8px 16px; /* Reduced button padding */
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: black;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}

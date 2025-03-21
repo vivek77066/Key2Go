@@ -1,37 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import  Header  from "../../Components/Header";
+import Header from "../../Components/Header";
 import { url } from "../../../Commons/constants";
 import axios from "axios";
-import "./BookingDetails.css"; // Import the CSS file
+import "./BookingDetails.css"; 
 
 function BookingDetails() {
   const location = useLocation();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [booking, setBooking] = useState({});
   const conBooking = location.state?.bookingDetails;
 
-  useEffect(() => {
-    if (!conBooking) return;
+  const bookingData = Array.isArray(conBooking) && conBooking.length > 0 ? conBooking[0] : null;
 
-    axios.get(url + "/api/bookings/" + conBooking.bookingid).then((response) => {
-      const result = response.data;
-      if (result!=null) {
-        setBooking(result.data);
-        sessionStorage.setItem("conBooking", JSON.stringify(result));
-      } else {
-        alert("Error occurred while getting bookings");
-      }
-    });
-  }, [conBooking]);
+
+  useEffect(() => {
+    if (!bookingData || !bookingData.bookingId) {
+      console.error("Invalid booking data:", bookingData);
+      return;
+    }
+
+    axios
+      .get(`${url}/api/bookings/${bookingData.bookingId}`)
+      .then((response) => {
+        console.log("API Response:", response.data);
+        if (response.data) {
+          setBooking(response.data.data || response.data);
+          sessionStorage.setItem("conBooking", JSON.stringify(response.data.data || response.data));
+        } else {
+          console.error("Error: No booking data received");
+          alert("Error occurred while getting bookings");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching booking details:", error);
+      });
+  }, [bookingData]);
 
   return (
     <div>
       <Header />
-      <div className="card container">
+      <div className="user_card_container">
         <h1 className="title-header">Booking Details</h1>
 
-        {booking && booking.bookingid ? (
+        {booking && booking.bookingId ? (
           <table className="booking-table">
             <thead>
               <tr>
@@ -40,9 +52,9 @@ function BookingDetails() {
             </thead>
             <tbody>
               <tr>
-                <td colSpan="4" className="image-container">
-                  <img
-                    className="car-image"
+                <td colSpan="4" className="card_image_container">
+                <img
+                    style={{ height: "300px", width: "400px" }}
                     src={url + "/" + booking.carCatImg}
                     alt="Car"
                   />
@@ -50,7 +62,7 @@ function BookingDetails() {
               </tr>
               <tr>
                 <th>Booking ID</th>
-                <td>{booking.bookingid}</td>
+                <td>{booking.bookingId}</td>
                 <th>Car Number</th>
                 <td>{booking.carNumber}</td>
               </tr>
@@ -61,22 +73,14 @@ function BookingDetails() {
                 <td>{booking.toDate}</td>
               </tr>
               <tr>
-                <th>Car Variant</th>
-                <td>{booking.carVarient}</td>
+                <th>Car Name</th>
+                <td>{booking.carName}</td>
                 <th>Price/Day</th>
-                <td>{booking.pricePerDay}</td>
-              </tr>
-              <tr>
-                <th>Pick-Up Location</th>
-                <td>{booking.location}</td>
-                <th>No. of Days</th>
-                <td>{booking.totalDays}</td>
+                <td>{booking.car?.rentPerDay}</td>
               </tr>
               <tr>
                 <th>Bill Amount</th>
-                <td>{booking.amount} Rs.</td>
-                <th>Advance Pay</th>
-                <td>{booking.securityDeposit} Rs.</td>
+                <td>{booking.totalAmount} Rs.</td>
               </tr>
             </tbody>
           </table>
@@ -87,8 +91,8 @@ function BookingDetails() {
         <button
           id="btn_back"
           type="button"
-          onClick={history.goBack}
-          className="back-button"
+          onClick={() => navigate(-1)}
+          className="card_back_button"
         >
           Back
         </button>

@@ -1,11 +1,16 @@
-.container {
-    width: 80%;
-    margin: 20px auto;
-    background-color: #ffffff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
+.user_card_container {
+  width: 80%;
+  max-width: 900px; /* Prevents overly wide containers */
+  margin: 20px auto;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Ensures space between elements inside */
+  margin-bottom: 20px; /* Prevents overlapping cards */
+  } 
   
   .title-header {
     text-align: center;
@@ -34,20 +39,20 @@
     font-size: 18px;
   }
   
-  .image-container {
+  .card_image_container {
     text-align: center;
     padding: 15px;
   }
   
   .car-image {
     height: 300px;
-    width: 400px;
+    width: 300px;
     object-fit: cover;
     border-radius: 5px;
     border: 2px solid #ddd;
   }
   
-  .back-button {
+  .card_back_button {
     display: block;
     width: 100px;
     margin: 20px auto;

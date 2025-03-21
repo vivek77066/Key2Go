@@ -1,34 +1,60 @@
-.container {
-    width: 90%;
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 20px;
-    text-align: center;
-  }
+.User_container {
+  width: 90%;
+ 
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.page-heading .title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+.Delete_User{
   
-  .page-heading .title {
-    font-size: 24px;
+
+    display: inline-block;
+    font-size: 16px;
     font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .table-container {
-    margin-top: 20px;
-  }
-  
-  .btn {
-    padding: 8px 12px;
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-    background-color: #ff9800;
+    padding: 12px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
-  }
+    text-align: center;
+    background-color: #ffc107;
+    
+
+}
+.Admin_customized_table th{
+  border: 1px solid #ddd;
+  padding: 14px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
   
-  .btn:hover {
-    background-color: #e68900;
-  }
-  
+}
+.btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #ff9800;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #e68900;
+}
