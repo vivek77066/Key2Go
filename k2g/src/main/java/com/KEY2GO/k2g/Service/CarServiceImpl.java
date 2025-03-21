@@ -97,6 +97,11 @@ public class CarServiceImpl implements CarService{
     }
 
     @Override
+    public void deleteCompany(int id) {
+        companyRepository.deleteById(id);
+    }
+
+    @Override
     public List<CarCompany> findAllCompany() {
         return companyRepository.findAll();
     }

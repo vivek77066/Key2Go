@@ -82,6 +82,11 @@ public class CarController {
         carService.deleteCar(id);
         return ResponseEntity.noContent().build();
     }
+    @DeleteMapping("/company/{id}")
+    public ResponseEntity<Void> deleteCompany(@PathVariable int id){
+        carService.deleteCompany(id);
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping("/company")
     public List<CarCompany> getAllCompany() {

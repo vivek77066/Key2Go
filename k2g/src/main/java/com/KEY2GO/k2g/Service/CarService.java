@@ -20,6 +20,8 @@ public interface CarService {
 
     public void deleteCar(int id);
 
+    public void deleteCompany(int id);
+
     public List<CarCompany> findAllCompany();
 
     public void saveCarCompany(MultipartFile carComImg, String companyName);
