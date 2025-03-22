@@ -1,4 +1,4 @@
-# Car Rental System
+# Key2Go - Car Rental System
 
 ## Overview
 The **Car Rental System** is a web-based application that allows users to browse, book, and rent cars. It has three roles: **Admin**, **Employee**, and **User**, each with specific functionalities.
